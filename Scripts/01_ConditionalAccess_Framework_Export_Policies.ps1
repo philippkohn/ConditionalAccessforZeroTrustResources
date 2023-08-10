@@ -21,7 +21,6 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 Write-Host "Disconnect from existing Microsoft Graph API Sessions"
 try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
 
-
 # Connect to Microsoft Graph API
 Write-Host "Connecting to Microsoft Graph API..."
 $RequiredScopes = @('User.Read.All', 'Organization.Read.All', 'Policy.Read.All')

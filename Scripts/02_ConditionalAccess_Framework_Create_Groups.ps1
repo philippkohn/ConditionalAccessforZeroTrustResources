@@ -17,15 +17,14 @@
 
 #>
 
-
 # Check PowerShell Version
 if ($PSVersionTable.PSVersion.Major -lt 7) {
     Throw "This script requires PowerShell 7 or a newer version."
 }
 
-# Connect to Microsoft Graph API
+# Try Discconnect Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions"
-Disconnect-MgGraph
+try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
 
 # Connect to Microsoft Graph API
 Write-Host "Connecting to Microsoft Graph API..."
@@ -68,6 +67,11 @@ New-MgGroup -DisplayName 'CA-Persona-Microsoft365ServiceAccounts' -MailEnabled:$
 New-MgGroup -DisplayName 'CA-Persona-Microsoft365ServiceAccounts-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Microsoft365ServiceAccounts-Exclusions' -SecurityEnabled:$true
 New-MgGroup -DisplayName 'CA-Persona-OnPremisesServiceAccounts' -MailEnabled:$false -MailNickname 'CA-Persona-OnPremisesServiceAccounts' -SecurityEnabled:$true
 New-MgGroup -DisplayName 'CA-Persona-OnPremisesServiceAccounts-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-OnPremisesServiceAccounts-Exclusions' -SecurityEnabled:$true
+
+# Try Discconnect Microsoft Graph API
+Write-Host "Disconnect from existing Microsoft Graph API Sessions"
+try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
+
 Write-Host ""
 Write-Host "Created all needed Security Groups for the Conditional Access Framework from Microsoft employee - Claus Jespersen; Change 10.08.23 only one exclusion Group per Persona" 
 

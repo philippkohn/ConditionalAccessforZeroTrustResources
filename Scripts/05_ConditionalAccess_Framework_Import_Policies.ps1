@@ -12,15 +12,13 @@ The path to the folder containing the XML files.
     Author        Philipp Kohn, cloudcopilot.de, Twitter: @philipp_kohn
 #>
 
-Add-Type -AssemblyName System.Windows.Forms
+# Check PowerShell Version
+if ($PSVersionTable.PSVersion.Major -lt 7) {
+    Throw "This script requires PowerShell 7 or a newer version."
+  }
 
-# Check if the newest version of the Microsoft Graph PowerShell module is installed and install it if it is not
-#$requiredVersion = "1.9.0"
-#$installedVersion = (Get-Module -Name Microsoft.Graph.Identity.SignIns -ListAvailable).Version.ToString()
-#if ($installedVersion -lt $requiredVersion) {
-#    Write-Host "The newest version of the Microsoft Graph PowerShell module is required. Installing it now..."
-#    Install-Module -Name Microsoft.Graph.Identity.SignIns -RequiredVersion $requiredVersion -Force
-#}
+# Load the System.Windows.Forms assembly to create Windows-based applications
+Add-Type -AssemblyName System.Windows.Forms
 
 # Disconnect from Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions"

@@ -12,7 +12,7 @@ In the **directory M365x77476191.onmicrosoft.com-08-10-2023** there are ready-co
 - ...
 - ...
 
-> # See more here for a description on CA configured for Zero Trust
+> See more here for a description on CA configured for Zero Trust
 > - [Conditional Access for Zero Trust - Azure Architecture Center | Microsoft Learn](https://learn.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-zero-trust)
 > - [Conditional Access framework and policies - Azure Architecture Center | Microsoft Learn](https://learn.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-framework)
 

@@ -5,16 +5,16 @@ Because I find Microsoft365DSC too cumbersome in daily business.
 
 In the **directory [M365x77476191.onmicrosoft.com-08-10-2023](https://github.com/philippkohn/ConditionalAccessforZeroTrustResources/tree/main/ConditionalAccessSamplePolicies/M365x77476191.onmicrosoft.com-08-10-2023)** are example policies that are based on the Conditional Access Framework for Zero Trust Framework from "Microsoft - Claus Jespersen" and largely adhere to the framework guidelines.
 
-**With a few minor adjustments**
-[] Complete Changelog and description
-
-- Using only one exclusion Group per Persona
-- ...
-- ...
-
 > **Disclaimer**
 > - Please test the Conditional Access Sample Policies in your Microsoft 365 Dev Environment before Production use!
 > - Use a Break Glass Account - Don't shoot yourself in the foot ⚠️
+
+Change Log
+-----------------------------------------------------
+- Using only one exclusion Group per Persona
+- ...
+- ...
+- To be completed
 
 Further Information
 -----------------------------------------------------

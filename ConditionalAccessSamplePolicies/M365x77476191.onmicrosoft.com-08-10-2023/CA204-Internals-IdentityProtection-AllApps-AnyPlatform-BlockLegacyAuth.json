@@ -1,0 +1,52 @@
+{
+  "conditions": {
+    "userRiskLevels": [],
+    "devices": null,
+    "clientAppTypes": [
+      "exchangeActiveSync",
+      "other"
+    ],
+    "applications": {
+      "includeUserActions": [],
+      "applicationFilter": null,
+      "includeApplications": [
+        "All"
+      ],
+      "includeAuthenticationContextClassReferences": [],
+      "excludeApplications": []
+    },
+    "signInRiskLevels": [],
+    "clientApplications": null,
+    "servicePrincipalRiskLevels": [],
+    "users": {
+      "excludeUsers": [],
+      "excludeRoles": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeGuestsOrExternalUsers": null,
+      "includeGroups": [
+        "b86af40e-e4f0-4e83-a2bb-ef5321269384"
+      ],
+      "includeRoles": [],
+      "excludeGroups": [
+        "ee2bdc01-80c2-4e28-9882-858bcfa005bf",
+        "451cabbb-7455-4cf2-9d69-27463ef371c4"
+      ],
+      "includeUsers": []
+    },
+    "locations": null,
+    "platforms": null
+  },
+  "state": "enabled",
+  "grantControls": {
+    "authenticationStrength": null,
+    "termsOfUse": [],
+    "builtInControls": [
+      "block"
+    ],
+    "operator": "OR",
+    "customAuthenticationFactors": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('1dcb08ae-716b-4df9-99e8-a0d7ada9f98e')/grantControls/authenticationStrength/$entity"
+  },
+  "displayName": "CA204-Internals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+  "sessionControls": null
+}

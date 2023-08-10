@@ -1,0 +1,61 @@
+{
+  "conditions": {
+    "userRiskLevels": [],
+    "devices": null,
+    "platforms": {
+      "includePlatforms": [
+        "all"
+      ],
+      "excludePlatforms": [
+        "android",
+        "iOS",
+        "windows",
+        "macOS"
+      ]
+    },
+    "clientAppTypes": [
+      "all"
+    ],
+    "applications": {
+      "includeUserActions": [],
+      "applicationFilter": null,
+      "includeApplications": [
+        "All"
+      ],
+      "includeAuthenticationContextClassReferences": [],
+      "excludeApplications": []
+    },
+    "signInRiskLevels": [],
+    "clientApplications": null,
+    "servicePrincipalRiskLevels": [],
+    "locations": null,
+    "users": {
+      "excludeUsers": [],
+      "excludeRoles": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeGuestsOrExternalUsers": null,
+      "includeGroups": [
+        "2a5e5a3b-43a6-46cd-aa10-c8900531e609"
+      ],
+      "includeRoles": [],
+      "excludeGroups": [
+        "ee2bdc01-80c2-4e28-9882-858bcfa005bf",
+        "1e04b230-361f-457e-9916-6a30b269188a"
+      ],
+      "includeUsers": []
+    }
+  },
+  "state": "disabled",
+  "grantControls": {
+    "authenticationStrength": null,
+    "termsOfUse": [],
+    "builtInControls": [
+      "block"
+    ],
+    "operator": "OR",
+    "customAuthenticationFactors": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('b8731ff1-5b34-4e9e-83e2-dd941be94a00')/grantControls/authenticationStrength/$entity"
+  },
+  "displayName": "CA307-Externals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+  "sessionControls": null
+}

@@ -12,11 +12,11 @@ With a few minor adjustments:
 
 
 See more here for a description on CA configured for Zero Trust
-https://learn.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-zero-trust
-https://learn.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-framework
+- https://learn.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-zero-trust
+- https://learn.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-framework
 
+(c) Philipp Kohn - 10.08.2023
 -----------------------------------------------------
 Old description from orginal repo:
 https://github.com/microsoft/ConditionalAccessforZeroTrustResources/blob/main/ConditionalAccessSamplePolicies/readme.md
-
-(c) Philipp Kohn - 10.08.2023
+-----------------------------------------------------

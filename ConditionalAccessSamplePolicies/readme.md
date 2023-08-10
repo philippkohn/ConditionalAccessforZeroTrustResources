@@ -16,9 +16,9 @@ In the **directory [M365x77476191.onmicrosoft.com-08-10-2023](https://github.com
 > - Please test the Conditional Access Sample Policies in your Microsoft 365 Dev Environment before Production use!
 > - Use a Break Glass Account - Don't shoot yourself in the foot ⚠️
 
-Old description from original repo & source
+Further Information
 -----------------------------------------------------
 *See more here for a description on CA configured for Zero Trust*
 - [Conditional Access for Zero Trust - Azure Architecture Center | Microsoft Learn](https://learn.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-zero-trust)
 - [Conditional Access framework and policies - Azure Architecture Center | Microsoft Learn](https://learn.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-framework)
-- [Microsoft/ConditionalAccessforZeroTrustResources/ConditionalAccessSamplePolicies/readme.md](https://github.com/microsoft/ConditionalAccessforZeroTrustResources/blob/main/ConditionalAccessSamplePolicies/readme.md)
+- [Readme of the original repo using Microsoft365DSC](https://github.com/microsoft/ConditionalAccessforZeroTrustResources/blob/main/ConditionalAccessSamplePolicies/readme.md)

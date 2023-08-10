@@ -18,6 +18,6 @@ In the **directory M365x77476191.onmicrosoft.com-08-10-2023** there are ready-co
 
 (c) Philipp Kohn - 11.08.2023
 -----------------------------------------------------
-Old description from orginal repo:
-https://github.com/microsoft/ConditionalAccessforZeroTrustResources/blob/main/ConditionalAccessSamplePolicies/readme.md
------------------------------------------------------
+Old description from original repo:
+[Microsoft/ConditionalAccessforZeroTrustResources/ConditionalAccessSamplePolicies
+/readme.md](https://github.com/microsoft/ConditionalAccessforZeroTrustResources/blob/main/ConditionalAccessSamplePolicies/readme.md)

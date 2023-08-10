@@ -1,3 +1,5 @@
+Old Readme Version - To be Updated
+-----------------------------------------------------
 This folder has CA policies as Microsoft365DSC files as well as an Excel Spreadsheet.
 
 Two sepeparate folders have Microsoft365DSC files for easy/automated deployment of CA groups and policies. 
@@ -26,5 +28,4 @@ Update-M365DSCAllowedGraphScopes or Connect with the Microsoft Graph API and gra
 Connect-MgGraph -TenantId "Azure AD tenant id guid" -Scopes 
 
 https://microsoft365dsc.com/user-guide/get-started/authentication-and-permissions/
-
-
+-----------------------------------------------------

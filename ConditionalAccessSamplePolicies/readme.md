@@ -3,7 +3,9 @@ Conditional Access Sample Policies
 Instead of Microsoft365DSC, I decided to use Microsoft Graph PowerShell Scripts.
 Because I find Microsoft365DSC too cumbersome in daily business.
 
-In the **directory [M365x77476191.onmicrosoft.com-08-10-2023](https://github.com/philippkohn/ConditionalAccessforZeroTrustResources/tree/main/ConditionalAccessSamplePolicies/M365x77476191.onmicrosoft.com-08-10-2023)** there are ready-configured example policies that are based on the Conditional Access Framework for Zero Trust Framework from "Microsoft - Claus Jespersen" and largely adhere to the guidelines.
+In the **directory [M365x77476191.onmicrosoft.com-08-10-2023](https://github.com/philippkohn/ConditionalAccessforZeroTrustResources/tree/main/ConditionalAccessSamplePolicies/M365x77476191.onmicrosoft.com-08-10-2023)** there are example policies that are based on the Conditional Access Framework for Zero Trust Framework from "Microsoft - Claus Jespersen" and largely adhere to the guidelines.
+
+<font color="red">Please test them in your Microsoft 365 Dev Environment before Production use!</font>
 
 **With a few minor adjustments**
 [] Complete Changelog and description

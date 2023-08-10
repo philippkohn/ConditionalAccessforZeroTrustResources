@@ -1,4 +1,4 @@
-Conditional Access Sample Policies
+Conditional Access for Zero Trust - Sample Policies
 -----------------------------------------------------
 Instead of Microsoft365DSC, I decided to use Microsoft Graph PowerShell Scripts.
 Because I find Microsoft365DSC too cumbersome in daily business.

@@ -12,9 +12,9 @@ In the **directory [M365x77476191.onmicrosoft.com-08-10-2023](https://github.com
 - ...
 - ...
 
-> ⚠️**Disclaimer**⚠️
+> **Disclaimer**
 > - Please test the Conditional Access Sample Policies in your Microsoft 365 Dev Environment before Production use!
-> - Use a Break Glass Account - Don't shoot yourself in the foot
+> - Use a Break Glass Account - Don't shoot yourself in the foot ⚠️
 
 Old description from original repo & source
 -----------------------------------------------------

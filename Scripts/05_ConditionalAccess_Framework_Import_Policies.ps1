@@ -7,6 +7,9 @@ This script imports all Conditional Access policies from separate XML files with
 
 .PARAMETER Path
 The path to the folder containing the XML files.
+
+.NOTES
+    Author        Philipp Kohn, cloudcopilot.de, Twitter: @philipp_kohn
 #>
 
 Add-Type -AssemblyName System.Windows.Forms

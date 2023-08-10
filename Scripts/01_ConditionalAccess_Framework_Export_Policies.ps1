@@ -1,12 +1,15 @@
 <#
 .SYNOPSIS 
-Exports all Conditional Access policies from a tenant to separate JSON files.
+    Exports all Conditional Access policies from a tenant to separate JSON files.
 
 .DESCRIPTION
-This script connects to the Microsoft Graph API and retrieves all Conditional Access policies from a tenant. It then creates a folder named after the built-in onmicrosoft.com domain name of the tenant and the date of the export, and exports each policy to a separate JSON file with its actual name. It also displays a summary of the exported policies in the shell.
+    This script connects to the Microsoft Graph API and retrieves all Conditional Access policies from a tenant. It then creates a folder named after the built-in onmicrosoft.com domain name of the tenant and the date of the export, and exports each policy to a separate JSON file with its actual name. It also displays a summary of the exported policies in the shell.
 
 .OUTPUTS
-A folder containing JSON files for each Conditional Access policy, and a summary table in the shell.
+    A folder containing JSON files for each Conditional Access policy, and a summary table in the shell.
+
+.NOTES
+    Author        Philipp Kohn, cloudcopilot.de, Twitter: @philipp_kohn
 #>
 
 # Check PowerShell Version

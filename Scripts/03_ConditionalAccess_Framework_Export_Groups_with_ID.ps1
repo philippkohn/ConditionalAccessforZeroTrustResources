@@ -48,7 +48,7 @@ if ($answer -eq "y") {
 }
 
 # Declare output path variable
-$OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Framework_Groups_w_ID_Target.csv"
+$OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Framework_Groups_w_ID_Source.csv"
 
 # Get all Microsoft Entra groups with display name starting with 'CA-' 
 # Select only the relevant properties

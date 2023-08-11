@@ -1,4 +1,7 @@
 <#
+Script not working at the moment ...to be changed
+
+
 .SYNOPSIS
 Imports all Conditional Access policies from separate XML files with their actual name.
 
@@ -10,7 +13,7 @@ The path to the folder containing the XML files.
 
 .NOTES
     Author        Philipp Kohn, cloudcopilot.de, Twitter: @philipp_kohn
-#>
+
 
 # Check PowerShell Version
 if ($PSVersionTable.PSVersion.Major -lt 7) {
@@ -72,3 +75,4 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
     Write-Host ""
     Write-Host "Done."
 }
+#>

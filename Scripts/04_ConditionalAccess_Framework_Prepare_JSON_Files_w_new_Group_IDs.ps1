@@ -30,7 +30,7 @@ foreach ($i in 0..($SourceGroups.Count-1)) {
 }
 
 # Get the JSON files from the folder
-$JsonFiles = Get-ChildItem -Path "C:\Scripts\M365x77476191.onmicrosoft.com-08-10-2023" -Filter "*.json"
+$JsonFiles = Get-ChildItem -Path "C:\Scripts\M365x77476191.onmicrosoft.com-08-11-2023" -Filter "*.json"
 
 # Loop through each JSON file
 foreach ($JsonFile in $JsonFiles) {

@@ -40,6 +40,7 @@ if ($answer -eq "y") {
     # continue the script
 } elseif ($answer -eq "n") {
     # stop the script
+    Disconnect-MgGraph
 } else {
     # handle invalid input
 }
@@ -54,7 +55,7 @@ $date = Get-Date -Format "MM-dd-yyyy"
 
 # Create a folder named after the built-in onmicrosoft.com domain name of the tenant and the date of the export
 Write-Host "Creating a folder named after the built-in onmicrosoft.com domain name of the tenant and the date of the export..."
-$path = "$tenantName-$date"
+$path = "c:\scripts\$tenantName-$date"
 New-Item -ItemType Directory -Path $path | Out-Null
 
 # Export all Conditional Access policies to separate JSON files with their actual name and display a summary of the exported policies in the shell

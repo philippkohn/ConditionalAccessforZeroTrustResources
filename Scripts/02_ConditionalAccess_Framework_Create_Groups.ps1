@@ -57,7 +57,7 @@ New-MgGroup -DisplayName 'CA-Persona-AzureServiceAccounts' -MailEnabled:$false -
 New-MgGroup -DisplayName 'CA-Persona-AzureServiceAccounts-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-AzureServiceAccounts-Exclusions' -SecurityEnabled:$true
 New-MgGroup -DisplayName 'CA-Persona-Externals' -MailEnabled:$false -MailNickname 'CA-Persona-Externals' -SecurityEnabled:$true
 New-MgGroup -DisplayName 'CA-Persona-Externals-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Externals-Exclusions' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Global-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Global-AttackSurfaceReduction-Exclusions' -SecurityEnabled:$true
+New-MgGroup -DisplayName 'CA-Persona-Global-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Global-Exclusions' -SecurityEnabled:$true
 New-MgGroup -DisplayName 'CA-Persona-GuestAdmins' -MailEnabled:$false -MailNickname 'CA-Persona-GuestAdmins' -SecurityEnabled:$true
 New-MgGroup -DisplayName 'CA-Persona-GuestAdmins-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-GuestAdmins-Exclusions' -SecurityEnabled:$true
 New-MgGroup -DisplayName 'CA-Persona-Guests-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Guests-Exclusions' -SecurityEnabled:$true

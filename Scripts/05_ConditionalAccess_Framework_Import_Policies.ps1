@@ -7,11 +7,10 @@ This script imports all Conditional Access policies from separate JSON files wit
 
 .PARAMETER Path
 The path to the folder containing the JSON files.
-#>
 
 .NOTES
     Author        Philipp Kohn, cloudcopilot.de, Twitter: @philipp_kohn
-
+#>
 
 # Check PowerShell Version
 if ($PSVersionTable.PSVersion.Major -lt 7) {

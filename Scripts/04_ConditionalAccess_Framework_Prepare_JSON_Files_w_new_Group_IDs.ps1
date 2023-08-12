@@ -46,6 +46,10 @@ foreach ($i in 0..($SourceGroups.Count-1)) {
   $GroupMap[$SourceGroups[$i].Id] = $TargetGroups[$i].Id
 }
 
+# Load the assemblies that contain the types needed for the folder browser dialog
+[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
+[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+
 # Show a folder selection dialog box to select the folder containing the JSON files
 $dialog = New-Object System.Windows.Forms.FolderBrowserDialog
 $dialog.Description = "Select the folder containing the exported Conditional Access JSON files."

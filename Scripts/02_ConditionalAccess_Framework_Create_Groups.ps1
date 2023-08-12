@@ -5,7 +5,7 @@
 .DESCRIPTION
     This PowerShell script performs the following tasks:
     - Disconnects from any existing Microsoft Graph API sessions
-    - Connects to Microsoft Graph API with the specified scopes
+    - Connects to Microsoft Graph API with the specified scopes and asks for the TenantID to which Tenant the script should connect
     - Gets the built-in onmicrosoft.com domain name of the tenant
     - Gets the current user context and prompts the user to confirm the correct tenant
     - Creates all needed Security Groups for the Conditional Access Framework from Microsoft employee - Claus Jespersen

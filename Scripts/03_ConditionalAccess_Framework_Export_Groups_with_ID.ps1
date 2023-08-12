@@ -23,28 +23,18 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 
 # Try Discconnect Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions"
-try{Disconnect-MgGraph -ErrorAction SilentlyContinue}catch{}
+try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
 
 # Connect to Microsoft Graph API
 Write-Host "Connecting to Microsoft Graph API..."
-Connect-MgGraph -Scopes 'Group.Read.All'
-
-# Get the built-in onmicrosoft.com domain name of the tenant
-Write-Host "Getting the built-in onmicrosoft.com domain name of the tenant..."
-$tenantName = (Get-MgOrganization).VerifiedDomains | Where-Object {$_.IsInitial -eq $true} | Select-Object -ExpandProperty Name
-$CurrentUser = (Get-MgContext | Select-Object -ExpandProperty Account)
-#Write-Host "Tenant: $tenantName" -ForegroundColor 'Red' -BackgroundColor 'DarkGray'
-#Write-Host "User: $CurrentUser" -ForegroundColor 'Green' -BackgroundColor 'DarkGray'
-Write-Warning "Tenant: $tenantName"
-Write-Warning "User: $CurrentUser"
-Write-Host "!!IMPORTANT!! Please Check if you are logged in to the correct tenant - Take your time - Don't shoot yourself in the foot" -ForegroundColor 'Red' -BackgroundColor 'Black'
-$answer = Read-Host -Prompt "Enter y for yes or n for no"
-if ($answer -eq "y") {
-    # continue the script
-} elseif ($answer -eq "n") {
-    # stop the script
+$RequiredScopes = @('User.Read.All', 'Organization.Read.All', 'Policy.Read.All')
+Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
+$TenantID = Read-Host
+if ($TenantID) {
+    Connect-MgGraph -Scopes $RequiredScopes -TenantId $TenantID -ErrorAction Stop
 } else {
-    # handle invalid input
+    Write-Warning "No Tenant ID entered, aborting the script"
+    exit
 }
 
 # Declare output path variable

@@ -77,8 +77,7 @@ Write-Host "Disconnect from existing Microsoft Graph API Sessions"
 Disconnect-MgGraph
 
 Write-Host ""
-Write-Host "Exported all Conditional Access policies for $($tenantName) to $($path)"
-
 $summary | Format-Table -AutoSize
 Write-Host ""
+Write-Host "Exported all Conditional Access policies for $($tenantName) to $($path)"
 Write-Host "Done."

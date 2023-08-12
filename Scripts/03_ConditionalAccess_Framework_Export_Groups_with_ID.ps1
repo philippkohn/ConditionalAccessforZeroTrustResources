@@ -53,6 +53,7 @@ Disconnect-MgGraph
 
 Write-Host ""
 Write-Host "Exported Groups with ID for Mapping Table to prepare exported CA Policy JSON Files with new Group ID" -ForegroundColor Magenta
+Write-Host "Output Path: $OutputPath" -ForegroundColor Cyan
 
 Write-Host ""
 Write-Host "Done."

@@ -38,6 +38,8 @@ if ($TenantID) {
 }
 
 # Declare output path variable
+# Use Conditional_Access_Framework_Groups_w_ID_Source.csv for Source Tenant
+# Use Conditional_Access_Framework_Groups_w_ID_Target.csv for Target Tenant
 $OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Framework_Groups_w_ID_Source.csv"
 
 # Get all Microsoft Entra groups with display name starting with 'CA-' 

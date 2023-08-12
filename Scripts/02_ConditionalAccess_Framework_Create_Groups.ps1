@@ -68,9 +68,9 @@ New-MgGroup -DisplayName 'CA-Persona-Microsoft365ServiceAccounts-Exclusions' -Ma
 New-MgGroup -DisplayName 'CA-Persona-OnPremisesServiceAccounts' -MailEnabled:$false -MailNickname 'CA-Persona-OnPremisesServiceAccounts' -SecurityEnabled:$true
 New-MgGroup -DisplayName 'CA-Persona-OnPremisesServiceAccounts-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-OnPremisesServiceAccounts-Exclusions' -SecurityEnabled:$true
 
-# Try Discconnect Microsoft Graph API
+#Disconnect Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions"
-try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
+Disconnect-MgGraph
 
 Write-Host ""
 Write-Host "Created all needed Security Groups for the Conditional Access Framework from Microsoft employee - Claus Jespersen; Change 10.08.23 only one exclusion Group per Persona" 

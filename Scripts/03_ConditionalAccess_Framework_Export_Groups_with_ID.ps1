@@ -22,11 +22,11 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 }
 
 # Try Discconnect Microsoft Graph API
-Write-Host "Disconnect from existing Microsoft Graph API Sessions"
+Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor Cyan
 try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
 
 # Connect to Microsoft Graph API
-Write-Host "Connecting to Microsoft Graph API..."
+Write-Host "Connecting to Microsoft Graph API..." -ForegroundColor Magenta
 $RequiredScopes = @('User.Read.All', 'Organization.Read.All', 'Policy.Read.All')
 Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
 $TenantID = Read-Host
@@ -46,5 +46,11 @@ $OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Frame
 Get-MgGroup -Filter "startswith(displayName,'CA-')" | Select-Object DisplayName, Description, Id | Export-Csv -Path $OutputPath
 
 #Disconnect Microsoft Graph API
-Write-Host "Disconnect from existing Microsoft Graph API Sessions"
+Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor Cyan
 Disconnect-MgGraph
+
+Write-Host ""
+Write-Host "Exported Groups with ID for Mapping Table to prepare exported CA Policy JSON Files with new Group ID" -ForegroundColor Magenta
+
+Write-Host ""
+Write-Host "Done."

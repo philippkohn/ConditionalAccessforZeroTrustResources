@@ -37,10 +37,17 @@ if ($TenantID) {
     exit
 }
 
-# Declare output path variable
-# Use Conditional_Access_Framework_Groups_w_ID_Source.csv for Source Tenant
-# Use Conditional_Access_Framework_Groups_w_ID_Target.csv for Target Tenant
-$OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Framework_Groups_w_ID_Source.csv"
+<# 
+Declare output path variable with Path and Filename
+
+    - Use Conditional_Access_Framework_Groups_w_ID_Source.csv for Source Tenant
+    - Use Conditional_Access_Framework_Groups_w_ID_Target.csv for Target Tenant
+    - When you use the CA Policy Examples from this repo:
+      https://github.com/philippkohn/ConditionalAccessforZeroTrustResources/tree/main/ConditionalAccessSamplePolicies 
+    - You can use the existing CSV in the repo
+
+#>
+$OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Framework_Groups_w_ID_Target.csv"
 
 # Get all Microsoft Entra groups with display name starting with 'CA-' 
 # Select only the relevant properties

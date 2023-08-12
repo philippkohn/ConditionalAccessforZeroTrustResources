@@ -4,7 +4,7 @@
 
 .DESCRIPTION
     - This script checks the PowerShell version and requires PowerShell 7 or newer.
-    - It disconnects from any existing Microsoft Graph API sessions and connects to a new one with the Group.Read.All scope. 
+    - It disconnects from any existing Microsoft Graph API sessions and connects to a new one 
     - It then uses Get-MgGroup to filter the groups that start with ‘CA-’ and selects their DisplayName, Description, and Id properties. 
     - Finally, it exports the results to a CSV file in a specified path.
 

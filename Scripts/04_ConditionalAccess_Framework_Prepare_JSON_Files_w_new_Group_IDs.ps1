@@ -50,48 +50,47 @@ foreach ($i in 0..($SourceGroups.Count-1)) {
 [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
 [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
 
-# Show a folder selection dialog box to select the folder containing the JSON files
-$dialog = New-Object System.Windows.Forms.FolderBrowserDialog
-$dialog.Description = "Select the folder containing the exported Conditional Access JSON files."
-$dialog.ShowNewFolderButton = $false
-$result = $dialog.ShowDialog()
+Write-Warning "Enter the path to folder with the exported Conditional Access Policies"
+$JsonFiles = Read-Host
+if ($JsonFiles) {
+    
+      # Loop through each JSON file
+  foreach ($JsonFile in $JsonFiles) {
+    # Convert the JSON content to a PowerShell object
+    $JsonContent = Get-Content -Path $JsonFile.FullName -Raw | ConvertFrom-Json
 
-if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
-  $JsonFiles = $dialog.SelectedPath
+    # Loop through each excludeGroup value in the conditions.users.excludeGroups property
+    for ($i = 0; $i -lt $JsonContent.conditions.users.excludeGroups.Count; $i++) {
+      $ExcludeGroup = $JsonContent.conditions.users.excludeGroups[$i]
 
-# Loop through each JSON file
-foreach ($JsonFile in $JsonFiles) {
-  # Convert the JSON content to a PowerShell object
-  $JsonContent = Get-Content -Path $JsonFile.FullName -Raw | ConvertFrom-Json
-
-  # Loop through each excludeGroup value in the conditions.users.excludeGroups property
-  for ($i = 0; $i -lt $JsonContent.conditions.users.excludeGroups.Count; $i++) {
-    $ExcludeGroup = $JsonContent.conditions.users.excludeGroups[$i]
-
-    # Check if the excludeGroup value exists in the hashtable keys
-    if ($GroupMap.ContainsKey($ExcludeGroup)) {
-      # Replace the excludeGroup value with the corresponding hashtable value
-      $JsonContent.conditions.users.excludeGroups[$i] = $GroupMap[$ExcludeGroup]
+      # Check if the excludeGroup value exists in the hashtable keys
+      if ($GroupMap.ContainsKey($ExcludeGroup)) {
+        # Replace the excludeGroup value with the corresponding hashtable value
+        $JsonContent.conditions.users.excludeGroups[$i] = $GroupMap[$ExcludeGroup]
+      }
     }
-  }
 
-  # Loop through each includeGroup value in the conditions.users.includeGroups property
-  for ($i = 0; $i -lt $JsonContent.conditions.users.includeGroups.Count; $i++) {
-    $IncludeGroup = $JsonContent.conditions.users.includeGroups[$i]
+    # Loop through each includeGroup value in the conditions.users.includeGroups property
+    for ($i = 0; $i -lt $JsonContent.conditions.users.includeGroups.Count; $i++) {
+      $IncludeGroup = $JsonContent.conditions.users.includeGroups[$i]
 
-    # Check if the includeGroup value exists in the hashtable keys
-    if ($GroupMap.ContainsKey($IncludeGroup)) {
-      # Replace the includeGroup value with the corresponding hashtable value
-      $JsonContent.conditions.users.includeGroups[$i] = $GroupMap[$IncludeGroup]
+      # Check if the includeGroup value exists in the hashtable keys
+      if ($GroupMap.ContainsKey($IncludeGroup)) {
+        # Replace the includeGroup value with the corresponding hashtable value
+        $JsonContent.conditions.users.includeGroups[$i] = $GroupMap[$IncludeGroup]
+      }
     }
-  }
 
-  # Convert the PowerShell object back to JSON and overwrite the file
-  $JsonContent | ConvertTo-Json -Depth 4 | Set-Content -Path $JsonFile.FullName
+    # Convert the PowerShell object back to JSON and overwrite the file
+    $JsonContent | ConvertTo-Json -Depth 4 | Set-Content -Path $JsonFile.FullName
+  }
+} else {
+    Write-Warning "No Path entered, aborting the script"
+    exit
 }
+
 Write-Host ""
 Write-Host "Prepared the exported Conditional Access JSON Files with new Group IDs from the Groups of the Target Tenant" -ForegroundColor Magenta
 
 Write-Host ""
 Write-Host "Done."
-}

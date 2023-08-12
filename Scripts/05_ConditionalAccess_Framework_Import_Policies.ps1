@@ -1,15 +1,13 @@
 <#
-Script not working at the moment ...to be changed
-
-
 .SYNOPSIS
-Imports all Conditional Access policies from separate XML files with their actual name.
+Imports all Conditional Access policies from separate JSON files with their actual name.
 
 .DESCRIPTION
-This script imports all Conditional Access policies from separate XML files with their actual name and creates them as read-only policies in Microsoft Entra.
+This script imports all Conditional Access policies from separate JSON files with their actual name and creates them as read-only policies in Microsoft Entra.
 
 .PARAMETER Path
-The path to the folder containing the XML files.
+The path to the folder containing the JSON files.
+#>
 
 .NOTES
     Author        Philipp Kohn, cloudcopilot.de, Twitter: @philipp_kohn
@@ -18,14 +16,23 @@ The path to the folder containing the XML files.
 # Check PowerShell Version
 if ($PSVersionTable.PSVersion.Major -lt 7) {
     Throw "This script requires PowerShell 7 or a newer version."
-  }
+}
 
-# Load the System.Windows.Forms assembly to create Windows-based applications
-Add-Type -AssemblyName System.Windows.Forms
-
-# Disconnect from Microsoft Graph API
+# Try Discconnect Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions"
-try{Disconnect-MgGraph -ErrorAction SilentlyContinue}catch{}
+try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
+
+# Connect to Microsoft Graph API
+Write-Host "Connecting to Microsoft Graph API..."
+$RequiredScopes = @('User.Read.All', 'Organization.Read.All', 'Policy.Read.All')
+Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
+$TenantID = Read-Host
+if ($TenantID) {
+    Connect-MgGraph -Scopes $RequiredScopes -TenantId $TenantID -ErrorAction Stop
+} else {
+    Write-Warning "No Tenant ID entered, aborting the script"
+    exit
+}
 
 # Connect to Microsoft Graph API
 Write-Host "Connecting to Microsoft Graph API..."
@@ -49,30 +56,29 @@ if ($answer -eq "y") {
     # handle invalid input
 }
 
-# Show a folder selection dialog box to select the folder containing the XML files
+# Show a folder selection dialog box to select the folder containing the JSON files
 $dialog = New-Object System.Windows.Forms.FolderBrowserDialog
-$dialog.Description = "Select the folder containing the XML files."
+$dialog.Description = "Select the folder containing the JSON files."
 $dialog.ShowNewFolderButton = $false
 $result = $dialog.ShowDialog()
 
 if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
     $path = $dialog.SelectedPath
 
-    # Get all XML files in the specified folder
-    Write-Host "Getting all XML files in the specified folder..."
-    $files = Get-ChildItem -Path $path -Filter *.xml
+    # Get all JSON files in the specified folder
+    Write-Host "Getting all JSON files in the specified folder..."
+    $files = Get-ChildItem -Path $path -Filter *.json
 
-    # Import all Conditional Access policies from the XML files and create them as read-only policies in Azure AD
-    Write-Host "Importing all Conditional Access policies from the XML files and creating them as read-only policies in Azure AD..."
+    # Import all Conditional Access policies from the JSON files and create them as read-only policies in Azure AD
+    Write-Host "Importing all Conditional Access policies from the JSON files and creating them as read-only policies in Azure AD..."
     foreach ($file in $files) {
-        $policy = Import-Clixml -Path $file.FullName
+        $policy = Import-CliJSON -Path $file.FullName
         New-MgIdentityConditionalAccessPolicy -InputObject $policy -ReadOnly:$true
     }
 
     Write-Host ""
-    Write-Host "Imported all Conditional Access policies from $($files.Count) XML files in $($path)"
+    Write-Host "Imported all Conditional Access policies from $($files.Count) JSON files in $($path)"
 
     Write-Host ""
     Write-Host "Done."
 }
-#>

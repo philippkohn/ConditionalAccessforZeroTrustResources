@@ -23,14 +23,37 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 $SourceGroups = Import-Csv -Path "C:\Scripts\Conditional_Access_Framework_Groups_w_ID_Source.csv"
 $TargetGroups = Import-Csv -Path "C:\Scripts\Conditional_Access_Framework_Groups_w_ID_Target.csv"
 
+# Ask the user to confirm if they have checked or changed the file path to the CSV for the mapping table
+$Confirm = Read-Host -Prompt "Have you checked or changed, if necessary, the file path to the CSV-Files for the mapping table first? (y/n)"
+# If the user answers yes, proceed with the script
+if ($Confirm -eq "y") {
+    # Do something with the source and target groups
+}
+# If the user answers no, exit the script
+elseif ($Confirm -eq "n") {
+    Write-Host "Please check or change the file path to the CSV-Files for the mapping table first and then run the script again." -ForegroundColor Cyan
+    Exit
+}
+# If the user answers anything else, display an error message and exit the script
+else {
+    Write-Host "Invalid input. Please enter y or n." -ForegroundColor Red
+    Exit
+}
+
 # Create a hashtable to store the old and new ID values
 $GroupMap = @{}
 foreach ($i in 0..($SourceGroups.Count-1)) {
   $GroupMap[$SourceGroups[$i].Id] = $TargetGroups[$i].Id
 }
 
-# Get the JSON files from the folder
-$JsonFiles = Get-ChildItem -Path "C:\Scripts\M365x77476191.onmicrosoft.com-08-11-2023" -Filter "*.json"
+# Show a folder selection dialog box to select the folder containing the JSON files
+$dialog = New-Object System.Windows.Forms.FolderBrowserDialog
+$dialog.Description = "Select the folder containing the exported Conditional Access JSON files."
+$dialog.ShowNewFolderButton = $false
+$result = $dialog.ShowDialog()
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
+  $JsonFiles = $dialog.SelectedPath
 
 # Loop through each JSON file
 foreach ($JsonFile in $JsonFiles) {
@@ -62,3 +85,8 @@ foreach ($JsonFile in $JsonFiles) {
   # Convert the PowerShell object back to JSON and overwrite the file
   $JsonContent | ConvertTo-Json -Depth 4 | Set-Content -Path $JsonFile.FullName
 }
+Write-Host ""
+Write-Host "Prepared the exported Conditional Access JSON Files with new Group IDs from the Groups of the Target Tenant" -ForegroundColor Magenta
+
+Write-Host ""
+Write-Host "Done."

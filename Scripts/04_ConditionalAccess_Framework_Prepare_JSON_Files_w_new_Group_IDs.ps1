@@ -90,3 +90,4 @@ Write-Host "Prepared the exported Conditional Access JSON Files with new Group I
 
 Write-Host ""
 Write-Host "Done."
+}

@@ -10,6 +10,8 @@
 
 .NOTES
     Author        Philipp Kohn, cloudcopilot.de, Twitter: @philipp_kohn
+    Change Log    V1.00, 15/07/2023 - Initial version
+    Change Log    V1.01, 12/08/2023 - Added query of TenantID to mitigate the risk of using the script in the wrong Tenant
 #>
 
 # Check PowerShell Version
@@ -24,26 +26,23 @@ try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
 # Connect to Microsoft Graph API
 Write-Host "Connecting to Microsoft Graph API..."
 $RequiredScopes = @('User.Read.All', 'Organization.Read.All', 'Policy.Read.All')
-Connect-MgGraph -Scopes $RequiredScopes -ErrorAction Stop
+Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
+$TenantID = Read-Host
+if ($TenantID) {
+    Connect-MgGraph -Scopes $RequiredScopes -TenantId $TenantID -ErrorAction Stop
+} else {
+    Write-Warning "No Tenant ID entered, aborting the script"
+    exit
+}
 
 # Get the built-in onmicrosoft.com domain name of the tenant
 Write-Host "Getting the built-in onmicrosoft.com domain name of the tenant..."
 $tenantName = (Get-MgOrganization).VerifiedDomains | Where-Object {$_.IsInitial -eq $true} | Select-Object -ExpandProperty Name
 $CurrentUser = (Get-MgContext | Select-Object -ExpandProperty Account)
-#Write-Host "Tenant: $tenantName" -ForegroundColor 'Red' -BackgroundColor 'DarkGray'
-#Write-Host "User: $CurrentUser" -ForegroundColor 'Green' -BackgroundColor 'DarkGray'
-Write-Warning "Tenant: $tenantName"
-Write-Warning "User: $CurrentUser"
-Write-Host "!!IMPORTANT!! Please Check if you are logged in to the correct tenant - Take your time - Don't shoot yourself in the foot" -ForegroundColor 'Red' -BackgroundColor 'Black'
-$answer = Read-Host -Prompt "Enter y for yes or n for no"
-if ($answer -eq "y") {
-    # continue the script
-} elseif ($answer -eq "n") {
-    # stop the script
-    Disconnect-MgGraph
-} else {
-    # handle invalid input
-}
+Write-Host "Tenant: $tenantName" -ForegroundColor 'Magenta'
+Write-Host "User: $CurrentUser" -ForegroundColor 'Cyan'
+Write-Warning "Press any key to continue or Ctrl+C to cancel"
+$null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
 # Get all Conditional Access policies
 Write-Host "Getting all Conditional Access policies..."

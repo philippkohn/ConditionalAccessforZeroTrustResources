@@ -29,7 +29,7 @@ try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
 
 # Connect to Microsoft Graph API
 Write-Host "Connecting to Microsoft Graph API..."
-$RequiredScopes = @('Group.Write.All')
+$RequiredScopes = @('Group.ReadWrite.All', 'Directory.ReadWrite.All')
 Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
 $TenantID = Read-Host
 if ($TenantID) {

@@ -45,6 +45,6 @@ $OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Frame
 # Export the Output to a CSV File
 Get-MgGroup -Filter "startswith(displayName,'CA-')" | Select-Object DisplayName, Description, Id | Export-Csv -Path $OutputPath
 
-# Try Discconnect Microsoft Graph API
+#Disconnect Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions"
-try{Disconnect-MgGraph -ErrorAction SilentlyContinue}catch{}
+Disconnect-MgGraph

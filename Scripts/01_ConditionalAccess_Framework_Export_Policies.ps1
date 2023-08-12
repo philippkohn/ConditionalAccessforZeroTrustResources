@@ -72,9 +72,13 @@ foreach ($policy in $policies) {
         File = $file
     }
 }
-$summary | Format-Table -AutoSize
+#Disconnect Microsoft Graph API
+Write-Host "Disconnect from existing Microsoft Graph API Sessions"
 Disconnect-MgGraph
+
 Write-Host ""
 Write-Host "Exported all Conditional Access policies for $($tenantName) to $($path)"
+
+$summary | Format-Table -AutoSize
 Write-Host ""
 Write-Host "Done."

@@ -5,7 +5,7 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 
 # Connect to Microsoft Graph API
 Write-Host "Connecting to Microsoft Graph API..." -ForegroundColor Magenta
-$RequiredScopes = @('Application.Read.All', 'User.Read.All', 'Group.Read.All', 'Policy.ReadWrite.ConditionalAccess')
+$RequiredScopes = @('Application.ReadWrite.All', 'ServicePrincipal.ReadWrite.All', 'Application.Read.All', 'User.Read.All', 'Group.Read.All', 'Policy.ReadWrite.ConditionalAccess')
 Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
 $TenantID = Read-Host
 if ($TenantID) {
@@ -13,6 +13,24 @@ if ($TenantID) {
 } else {
     Write-Warning "No Tenant ID entered, aborting the script"
     exit
+}
+
+# Search for the Service Principal
+$servicePrincipal = Get-MgServicePrincipal -Filter "displayName eq 'Microsoft Intune Enrollment'"
+
+# Check if the Service Principal exists and display appropriate message
+if ($servicePrincipal) {
+    Write-Host "Service Principal 'Microsoft Intune Enrollment' exists in the tenant." -ForegroundColor Green
+} else {
+    Write-Host "Service Principal 'Microsoft Intune Enrollment' does not exist in the tenant. Creating now..." -ForegroundColor Yellow
+
+    # Create the Service Principal with the specified AppId
+    try {
+        New-MgApplicationServicePrincipal -AppId "d4ebce55-015a-49b5-a083-c84d1797ae8c"
+        Write-Host "Service Principal 'Microsoft Intune Enrollment' created successfully." -ForegroundColor Green
+    } catch {
+        Write-Host "Failed to create Service Principal 'Microsoft Intune Enrollment'. Error: $_" -ForegroundColor Red
+    }
 }
 
 # Query for the path of the folder that contains the JSON files
@@ -49,14 +67,17 @@ foreach ($file in $files) {
     }
 }
 
-<# Read the JSON content from the provided file
-$policyJson = Get-Content -Path "C:\Scripts\M365x77476191.onmicrosoft.com-08-13-2023\CA001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas.json" -Raw
+Write-Host "Remove write Permissions for Microsoft Graph Command Line Tools" -ForegroundColor Magenta
+# Find the service principal for the Microsoft Graph Command Line Tools
+$graphCmdLineToolsPrincipal = Get-MgServicePrincipal -Filter "displayName eq 'Microsoft Graph Command Line Tools'"
 
-# Use Invoke-MgGraphRequest to create a new Conditional Access policy
-try {
-    $response = Invoke-MgGraphRequest -Method POST -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies" -Body $policyJson -ContentType "application/json"
-    Write-Host "Policy imported successfully. Response:" $response.Content
-} catch {
-    Write-Error "Failed to import policy. Error:" $_.Exception.Message
+# Define the permissions you want to remove
+$permissionsToRemove = @('Policy.ReadWrite.ConditionalAccess', 'Group.ReadWrite.All', 'ServicePrincipal.ReadWrite.All', 'Application.ReadWrite.All')
+
+# Find and remove the OAuth2 Permission Grants for the Command Line Tools that match the permissions to remove
+$grants = Get-MgOauth2PermissionGrant -Filter "principalId eq '$($graphCmdLineToolsPrincipal.Id)'"
+$grants | ForEach-Object {
+    if ($_.Scope -in $permissionsToRemove) {
+        Remove-MgOauth2PermissionGrant -PermissionGrantId $_.Id
+    }
 }
-#>

@@ -15,8 +15,30 @@ if ($TenantID) {
     exit
 }
 
+# Query for the path of the folder that contains the JSON files
+$path = Read-Host "Enter the path of the folder that contains the Conditional Access Template Files in the JSON format"
 
-# Read the JSON content from the provided file
+# Get all JSON files from the folder
+Write-Host "Getting all JSON files from the folder..." -ForegroundColor Magenta
+$files = Get-ChildItem -Path $path -Filter *.json
+
+# Loop through each file and import the Conditional Access policy
+foreach ($file in $files) {
+    Write-Host "Processing file: $($file.Name)..." -ForegroundColor Yellow
+
+    # Read the JSON content from the current file
+    $policyJson = Get-Content -Path $file.FullName -Raw
+
+    # Use Invoke-MgGraphRequest to create a new Conditional Access policy
+    try {
+        $response = Invoke-MgGraphRequest -Method POST -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies" -Body $policyJson -ContentType "application/json"
+        Write-Host "Policy imported successfully from $($file.Name). Response:" $response.Content -ForegroundColor Green
+    } catch {
+        Write-Error "Failed to import policy from $($file.Name). Error:" $_.Exception.Message
+    }
+}
+
+<# Read the JSON content from the provided file
 $policyJson = Get-Content -Path "C:\Scripts\M365x77476191.onmicrosoft.com-08-13-2023\CA001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas.json" -Raw
 
 # Use Invoke-MgGraphRequest to create a new Conditional Access policy
@@ -26,3 +48,4 @@ try {
 } catch {
     Write-Error "Failed to import policy. Error:" $_.Exception.Message
 }
+#>

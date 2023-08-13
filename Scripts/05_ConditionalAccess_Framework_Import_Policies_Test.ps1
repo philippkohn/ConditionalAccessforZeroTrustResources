@@ -75,8 +75,9 @@ $graphCmdLineToolsPrincipal = Get-MgServicePrincipal -Filter "displayName eq 'Mi
 $permissionsToRemove = @('Policy.ReadWrite.ConditionalAccess', 'Group.ReadWrite.All', 'Application.ReadWrite.All')
 
 # Find and remove the OAuth2 Permission Grants for the Command Line Tools that match the permissions to remove
-$grants = Get-MgOauth2PermissionGrant -Filter "principalId eq '$($graphCmdLineToolsPrincipal.Id)'"
-$grants | ForEach-Object {
+$grants = Get-MgOauth2PermissionGrant
+$filteredGrants = $grants | Where-Object { $_.principalId -eq $graphCmdLineToolsPrincipal.Id }
+$filteredGrants | ForEach-Object {
     if ($_.Scope -in $permissionsToRemove) {
         Remove-MgOauth2PermissionGrant -PermissionGrantId $_.Id
     }

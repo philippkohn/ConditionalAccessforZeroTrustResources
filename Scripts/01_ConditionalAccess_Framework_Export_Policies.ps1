@@ -12,19 +12,21 @@
     Author        Philipp Kohn, cloudcopilot.de, Twitter: @philipp_kohn
     Change Log    V1.00, 15/07/2023 - Initial version
     Change Log    V1.01, 12/08/2023 - Added query of TenantID to mitigate the risk of using the script in the wrong Tenant
+    Change Log    V1.02, 13/08/2023 - Colors and formating 
 #>
 
 # Check PowerShell Version
+Write-Host "Check if running PowerShell Version 7.x" -ForegroundColor 'Cyan'
 if ($PSVersionTable.PSVersion.Major -lt 7) {
     Throw "This script requires PowerShell 7 or a newer version."
 }
 
 # Try Discconnect Microsoft Graph API
-Write-Host "Disconnect from existing Microsoft Graph API Sessions"
+Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor 'Magenta'
 try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
 
 # Connect to Microsoft Graph API
-Write-Host "Connecting to Microsoft Graph API..."
+Write-Host "Connecting to Microsoft Graph API..." -ForegroundColor 'Cyan'
 $RequiredScopes = @('User.Read.All', 'Organization.Read.All', 'Policy.Read.All')
 Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
 $TenantID = Read-Host
@@ -39,8 +41,8 @@ if ($TenantID) {
 Write-Host "Getting the built-in onmicrosoft.com domain name of the tenant..."
 $tenantName = (Get-MgOrganization).VerifiedDomains | Where-Object {$_.IsInitial -eq $true} | Select-Object -ExpandProperty Name
 $CurrentUser = (Get-MgContext | Select-Object -ExpandProperty Account)
-Write-Host "Tenant: $tenantName" -ForegroundColor 'Magenta'
-Write-Host "User: $CurrentUser" -ForegroundColor 'Cyan'
+Write-Host "Tenant: $tenantName" -ForegroundColor 'Cyan'
+Write-Host "User: $CurrentUser" -ForegroundColor 'Magenta'
 Write-Warning "Press any key to continue or Ctrl+C to cancel"
 $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
@@ -49,16 +51,16 @@ Write-Host "Getting all Conditional Access policies..."
 $policies = Invoke-MgGraphRequest -Method GET https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies | Select-Object -ExpandProperty Value
 
 # Get the current date in MM-dd-yyyy format
-Write-Host "Getting the current date in MM-dd-yyyy format..."
+Write-Host "Getting the current date in MM-dd-yyyy format..." -ForegroundColor 'Cyan'
 $date = Get-Date -Format "MM-dd-yyyy"
 
 # Create a folder named after the built-in onmicrosoft.com domain name of the tenant and the date of the export
-Write-Host "Creating a folder named after the built-in onmicrosoft.com domain name of the tenant and the date of the export..."
+Write-Host "Creating a folder named after the built-in onmicrosoft.com domain name of the tenant and the date of the export..." -ForegroundColor 'Magenta'
 $path = "c:\scripts\$tenantName-$date"
 New-Item -ItemType Directory -Path $path | Out-Null
 
 # Export all Conditional Access policies to separate JSON files with their actual name and display a summary of the exported policies in the shell
-Write-Host "Exporting all Conditional Access policies to separate JSON files with their actual name and displaying a summary of the exported policies in the shell..."
+Write-Host "Exporting all Conditional Access policies to separate JSON files with their actual name and displaying a summary of the exported policies in the shell..." -ForegroundColor 'Cyan' 
 $summary = @()
 foreach ($policy in $policies) {
     # Remove id, createdDateTime and modifiedDateTime from policy object
@@ -76,11 +78,11 @@ foreach ($policy in $policies) {
     }
 }
 #Disconnect Microsoft Graph API
-Write-Host "Disconnect from existing Microsoft Graph API Sessions"
+Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor 'Magenta' 
 Disconnect-MgGraph
 
 Write-Host ""
 $summary | Format-Table -AutoSize
 Write-Host ""
-Write-Host "Exported all Conditional Access policies for $($tenantName) to $($path)"
+Write-Host "Exported all Conditional Access policies for $($tenantName) to $($path)" -ForegroundColor 'Cyan'
 Write-Host "Done."

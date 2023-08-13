@@ -50,12 +50,6 @@ $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 # Query for the path of the folder that contains the JSON files
 $path = Read-Host "Enter the path of the folder that contains the Conditional Access Template Files in the JSON format"
 
-# Define a parameter for the path of the folder that contains the JSON files
-param(
-    [Parameter(Mandatory)]
-    [string]$Path
-)
-
 # Get all JSON files from the folder
 Write-Host "Getting all JSON files from the folder..." -ForegroundColor Magenta
 $files = Get-ChildItem -Path $path -Filter *.json

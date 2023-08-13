@@ -50,22 +50,27 @@ $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 # Query for the path of the folder that contains the JSON files
 $path = Read-Host "Enter the path of the folder that contains the Conditional Access Template Files in the JSON format"
 
+# Define a parameter for the path of the folder that contains the JSON files
+param(
+    [Parameter(Mandatory)]
+    [string]$Path
+)
+
 # Get all JSON files from the folder
 Write-Host "Getting all JSON files from the folder..." -ForegroundColor Magenta
 $files = Get-ChildItem -Path $path -Filter *.json
 
 # Import all Conditional Access policies from JSON files and display a summary of the imported policies in the shell
 Write-Host "Importing all Conditional Access policies from JSON files and displaying a summary of the imported policies in the shell..." -ForegroundColor Cyan
-$summary = @()
-foreach ($file in $files) {
+$summary = $files | ForEach-Object {
     # Read the policy object from the JSON file
-    $policy = Get-Content -Path $file.FullName | ConvertFrom-Json
-    # Invoke a POST request to create the policy in the target tenant
-    $result = Invoke-MgGraphRequest -Method POST https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies -Body $policy
-    $summary += [PSCustomObject]@{
+    $policy = Get-Content -Path $_.FullName | ConvertFrom-Json
+    # Create the policy in the target tenant using the Microsoft Graph PowerShell SDK
+    $result = New-MgIdentityConditionalAccessPolicy -BodyParameter $policy
+    [PSCustomObject]@{
         Name = $policy.DisplayName
         Id = $result.Id
-        File = $file.FullName
+        File = $_.FullName
     }
 }
 

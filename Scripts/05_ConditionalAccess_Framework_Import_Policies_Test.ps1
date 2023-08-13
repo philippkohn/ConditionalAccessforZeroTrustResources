@@ -29,14 +29,20 @@ foreach ($file in $files) {
     # Read the JSON content from the current file
     $policyJson = Get-Content -Path $file.FullName -Raw
 
+
     # Use Invoke-MgGraphRequest to create a new Conditional Access policy
     try {
         $response = Invoke-MgGraphRequest -Method POST -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies" -Body $policyJson -ContentType "application/json"
         Write-Host "Policy imported successfully from $($file.Name). Response:" $response.Content -ForegroundColor Green
     } catch {
-        # Capture more detailed error information
-        $errorDetails = $_.Exception.Response.Content | ConvertFrom-Json
-        Write-Error "Failed to import policy from $($file.Name). Error: $($errorDetails.error.message)"
+        # Check if the error details are in JSON format
+        if ($_.Exception.Response.Content -match "^\s*\{.*\}\s*$") {
+            $errorDetails = $_.Exception.Response.Content | ConvertFrom-Json
+            Write-Error "Failed to import policy from $($file.Name). Error: $($errorDetails.error.message)"
+        } else {
+            # If not in JSON format, just output the error content as a string
+            Write-Error "Failed to import policy from $($file.Name). Error: $($_.Exception.Response.Content)"
+        }
     }
 }
 

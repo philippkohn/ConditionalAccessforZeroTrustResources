@@ -5,7 +5,7 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 
 # Connect to Microsoft Graph API
 Write-Host "Connecting to Microsoft Graph API..." -ForegroundColor Magenta
-$RequiredScopes = @('Application.ReadWrite.All', 'ServicePrincipal.ReadWrite.All', 'Application.Read.All', 'User.Read.All', 'Group.Read.All', 'Policy.ReadWrite.ConditionalAccess')
+$RequiredScopes = @('Application.ReadWrite.All', 'User.Read.All', 'Group.Read.All', 'Policy.ReadWrite.ConditionalAccess')
 Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
 $TenantID = Read-Host
 if ($TenantID) {
@@ -72,7 +72,7 @@ Write-Host "Remove write Permissions for Microsoft Graph Command Line Tools" -Fo
 $graphCmdLineToolsPrincipal = Get-MgServicePrincipal -Filter "displayName eq 'Microsoft Graph Command Line Tools'"
 
 # Define the permissions you want to remove
-$permissionsToRemove = @('Policy.ReadWrite.ConditionalAccess', 'Group.ReadWrite.All', 'ServicePrincipal.ReadWrite.All', 'Application.ReadWrite.All')
+$permissionsToRemove = @('Policy.ReadWrite.ConditionalAccess', 'Group.ReadWrite.All', 'Application.ReadWrite.All')
 
 # Find and remove the OAuth2 Permission Grants for the Command Line Tools that match the permissions to remove
 $grants = Get-MgOauth2PermissionGrant -Filter "principalId eq '$($graphCmdLineToolsPrincipal.Id)'"

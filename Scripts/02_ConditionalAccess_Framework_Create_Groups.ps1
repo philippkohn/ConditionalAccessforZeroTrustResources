@@ -15,6 +15,7 @@
     Change Log    V1.00, 15/07/2023 - Initial version
     Change Log    V1.01, 10/08/2023 - Only one exclusion Group per Persona
     Change Log    V1.02, 12/08/2023 - Added query of TenantID to mitigate the risk of using the script in the wrong Tenant
+    Change Log    V1.03, 13/08/2023 - Modified the script to use a Variable and loop through the group creation
 
 #>
 
@@ -48,25 +49,32 @@ Write-Host "User: $CurrentUser" -ForegroundColor 'Cyan'
 Write-Warning "Press any key to continue or Ctrl+C to cancel"
 $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
-# Create security groups
+# Define an array of groups
+$groups = @(
+    'CA-BreakGlassAccounts'
+    'CA-Persona-Admins'
+    'CA-Persona-Admins-Exclusions'
+    'CA-Persona-AzureServiceAccounts'
+    'CA-Persona-AzureServiceAccounts-Exclusions'
+    'CA-Persona-Externals'
+    'CA-Persona-Externals-Exclusions'
+    'CA-Persona-Global-Exclusions'
+    'CA-Persona-GuestAdmins'
+    'CA-Persona-GuestAdmins-Exclusions'
+    'CA-Persona-Guests-Exclusions'
+    'CA-Persona-Internals'
+    'CA-Persona-Internals-Exclusions'
+    'CA-Persona-Microsoft365ServiceAccounts'
+    'CA-Persona-Microsoft365ServiceAccounts-Exclusions'
+    'CA-Persona-OnPremisesServiceAccounts'
+    'CA-Persona-OnPremisesServiceAccounts-Exclusions'
+)
+
+# Loop through the array and create security groups
 Write-Host "Creating security groups..."
-New-MgGroup -DisplayName 'CA-BreakGlassAccounts' -MailEnabled:$false -MailNickname 'CA-BreakGlassAccounts' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Admins' -MailEnabled:$false -MailNickname 'CA-Persona-Admins' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Admins-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Admins-Exclusions' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-AzureServiceAccounts' -MailEnabled:$false -MailNickname 'CA-Persona-AzureServiceAccounts' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-AzureServiceAccounts-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-AzureServiceAccounts-Exclusions' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Externals' -MailEnabled:$false -MailNickname 'CA-Persona-Externals' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Externals-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Externals-Exclusions' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Global-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Global-Exclusions' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-GuestAdmins' -MailEnabled:$false -MailNickname 'CA-Persona-GuestAdmins' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-GuestAdmins-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-GuestAdmins-Exclusions' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Guests-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Guests-Exclusions' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Internals' -MailEnabled:$false -MailNickname 'CA-Persona-Internals' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Internals-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Internals-Exclusions' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Microsoft365ServiceAccounts' -MailEnabled:$false -MailNickname 'CA-Persona-Microsoft365ServiceAccounts' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-Microsoft365ServiceAccounts-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-Microsoft365ServiceAccounts-Exclusions' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-OnPremisesServiceAccounts' -MailEnabled:$false -MailNickname 'CA-Persona-OnPremisesServiceAccounts' -SecurityEnabled:$true
-New-MgGroup -DisplayName 'CA-Persona-OnPremisesServiceAccounts-Exclusions' -MailEnabled:$false -MailNickname 'CA-Persona-OnPremisesServiceAccounts-Exclusions' -SecurityEnabled:$true
+foreach ($group in $groups) {
+    New-MgGroup -DisplayName $group -MailEnabled:$false -MailNickname $group -SecurityEnabled:$true
+}
 
 #Disconnect Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions"

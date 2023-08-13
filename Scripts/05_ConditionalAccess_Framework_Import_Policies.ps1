@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS 
-    Imports Conditional Access policies from JSON files to another tenant.
+    Imports Conditional Access policies from JSON files to a Microsoft 365 tenant.
 
 .DESCRIPTION
     This script queries for the path of the folder that contains the JSON files with the Conditional Access policies. 
@@ -23,12 +23,12 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 }
 
 # Try Discconnect Microsoft Graph API
-Write-Host "Disconnect from existing Microsoft Graph API Sessions"
+Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor Cyan
 try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
 
 # Connect to Microsoft Graph API
-Write-Host "Connecting to Microsoft Graph API..."
-$RequiredScopes = @('User.Read.All', 'Group.Read.All', 'Policy.ReadWrite.All')
+Write-Host "Connecting to Microsoft Graph API..." -ForegroundColor Magenta
+$RequiredScopes = @('User.Read.All', 'Group.Read.All', 'Policy.ReadWrite.ConditionalAccess')
 Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
 $TenantID = Read-Host
 if ($TenantID) {
@@ -39,7 +39,7 @@ if ($TenantID) {
 }
 
 # Get the built-in onmicrosoft.com domain name of the tenant
-Write-Host "Getting the built-in onmicrosoft.com domain name of the tenant..."
+Write-Host "Getting the built-in onmicrosoft.com domain name of the tenant..." -ForegroundColor Cyan
 $tenantName = (Get-MgOrganization).VerifiedDomains | Where-Object {$_.IsInitial -eq $true} | Select-Object -ExpandProperty Name
 $CurrentUser = (Get-MgContext | Select-Object -ExpandProperty Account)
 Write-Host "Tenant: $tenantName" -ForegroundColor 'Magenta'
@@ -51,11 +51,11 @@ $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 $path = Read-Host "Enter the path of the folder that contains the Conditional Access Template Files in the JSON format"
 
 # Get all JSON files from the folder
-Write-Host "Getting all JSON files from the folder..."
+Write-Host "Getting all JSON files from the folder..." -ForegroundColor Magenta
 $files = Get-ChildItem -Path $path -Filter *.json
 
 # Import all Conditional Access policies from JSON files and display a summary of the imported policies in the shell
-Write-Host "Importing all Conditional Access policies from JSON files and displaying a summary of the imported policies in the shell..."
+Write-Host "Importing all Conditional Access policies from JSON files and displaying a summary of the imported policies in the shell..." -ForegroundColor Cyan
 $summary = @()
 foreach ($file in $files) {
     # Read the policy object from the JSON file
@@ -70,10 +70,10 @@ foreach ($file in $files) {
 }
 
 #Disconnect Microsoft Graph API
-Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor Cyan
+Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor Magenta
 Disconnect-MgGraph
 
 Write-Host ""
 $summary | Format-Table -AutoSize
-Write-Host "Imported all Conditional Access policies to $($tenantName) from $($path)" -ForegroundColor Magenta
+Write-Host "Imported all Conditional Access policies to $($tenantName) from $($path)" -ForegroundColor Cyan
 Write-Host "Done."

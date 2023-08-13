@@ -5,7 +5,7 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 
 # Connect to Microsoft Graph API
 Write-Host "Connecting to Microsoft Graph API..." -ForegroundColor Magenta
-$RequiredScopes = @('User.Read.All', 'Group.Read.All', 'Policy.ReadWrite.ConditionalAccess')
+$RequiredScopes = @('Application.Read.All', 'User.Read.All', 'Group.Read.All', 'Policy.ReadWrite.ConditionalAccess')
 Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
 $TenantID = Read-Host
 if ($TenantID) {

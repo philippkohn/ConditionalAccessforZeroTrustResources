@@ -63,6 +63,9 @@ $summary = @()
 foreach ($policy in $policies) {
     # Remove id, createdDateTime and modifiedDateTime from policy object
     $policy = $policy | Select-Object -Property * -ExcludeProperty id, createdDateTime, modifiedDateTime
+    # Change state from enabled to disabled
+    # Don't lock yourself out please use ReportOnly and configure and test the Breakglass Accounts before enabling the policies
+    $policy.state = "disabled"
     $name = $policy.DisplayName.Replace('/', '_')
     $file = "$path\$name.json"
     $policy | ConvertTo-Json -Depth 10 | Out-File -FilePath $file

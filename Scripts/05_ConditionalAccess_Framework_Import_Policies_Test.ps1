@@ -34,7 +34,9 @@ foreach ($file in $files) {
         $response = Invoke-MgGraphRequest -Method POST -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies" -Body $policyJson -ContentType "application/json"
         Write-Host "Policy imported successfully from $($file.Name). Response:" $response.Content -ForegroundColor Green
     } catch {
-        Write-Error "Failed to import policy from $($file.Name). Error:" $_.Exception.Message
+        # Capture more detailed error information
+        $errorDetails = $_.Exception.Response.Content | ConvertFrom-Json
+        Write-Error "Failed to import policy from $($file.Name). Error: $($errorDetails.error.message)"
     }
 }
 

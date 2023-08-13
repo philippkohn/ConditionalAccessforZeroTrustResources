@@ -18,6 +18,7 @@
 if ($PSVersionTable.PSVersion.Major -lt 7) {
   Throw "This script requires PowerShell 7 or a newer version."
 }
+
 # Ask for the source and target group mappings file path
 $FilePath = Read-Host -Prompt "Enter the file path for the source and target group mappings CSV files"
 

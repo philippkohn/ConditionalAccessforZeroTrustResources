@@ -26,7 +26,7 @@ if ($servicePrincipal) {
 
     # Create the Service Principal with the specified AppId
     try {
-        New-MgApplicationServicePrincipal -AppId "d4ebce55-015a-49b5-a083-c84d1797ae8c"
+        New-MgServicePrincipal -AppId "d4ebce55-015a-49b5-a083-c84d1797ae8c"
         Write-Host "Service Principal 'Microsoft Intune Enrollment' created successfully." -ForegroundColor Green
     } catch {
         Write-Host "Failed to create Service Principal 'Microsoft Intune Enrollment'. Error: $_" -ForegroundColor Red

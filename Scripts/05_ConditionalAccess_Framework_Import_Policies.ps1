@@ -58,7 +58,8 @@ $files = Get-ChildItem -Path $path -Filter *.json
 Write-Host "Importing all Conditional Access policies from JSON files and displaying a summary of the imported policies in the shell..." -ForegroundColor Cyan
 $summary = $files | ForEach-Object {
     # Read the policy object from the JSON file
-    $policy = Get-Content -Path $_.FullName | ConvertFrom-Json
+    $policy = Get-Content -Path $_.FullName | ConvertFrom-Json -AsHashtable
+
     # Create the policy in the target tenant using the Microsoft Graph PowerShell SDK
     $result = New-MgIdentityConditionalAccessPolicy -BodyParameter $policy
     [PSCustomObject]@{

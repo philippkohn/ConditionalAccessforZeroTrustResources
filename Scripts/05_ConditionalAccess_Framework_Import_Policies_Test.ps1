@@ -35,13 +35,16 @@ foreach ($file in $files) {
         $response = Invoke-MgGraphRequest -Method POST -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies" -Body $policyJson -ContentType "application/json"
         Write-Host "Policy imported successfully from $($file.Name). Response:" $response.Content -ForegroundColor Green
     } catch {
+        # Read the StreamContent and convert it to a string
+        $errorContent = $_.Exception.Response.Content.ReadAsStringAsync().Result
+
         # Check if the error details are in JSON format
-        if ($_.Exception.Response.Content -match "^\s*\{.*\}\s*$") {
-            $errorDetails = $_.Exception.Response.Content | ConvertFrom-Json
+        if ($errorContent -match "^\s*\{.*\}\s*$") {
+            $errorDetails = $errorContent | ConvertFrom-Json
             Write-Error "Failed to import policy from $($file.Name). Error: $($errorDetails.error.message)"
         } else {
             # If not in JSON format, just output the error content as a string
-            Write-Error "Failed to import policy from $($file.Name). Error: $($_.Exception.Response.Content)"
+            Write-Error "Failed to import policy from $($file.Name). Error: $errorContent"
         }
     }
 }

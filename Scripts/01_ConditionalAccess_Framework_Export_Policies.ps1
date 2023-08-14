@@ -30,13 +30,10 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
     Throw "This script requires PowerShell 7 or a newer version."
 }
 
-# Try Disconnect Microsoft Graph API
-Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor 'Magenta'
-try {
-    Disconnect-MgGraph -ErrorAction SilentlyContinue
-} catch {
-    Write-Host "Error disconnecting from Microsoft Graph: $_" -ForegroundColor 'Red'
-}
+# Try Discconnect Microsoft Graph API
+Write-Host "Disconnect from existing Microsoft Graph API Sessions"
+try{Disconnect-MgGraph -ErrorAction SilentlyContinue}catch{}
+
 
 # Add environment variables to be used by Connect-MgGraph
 $env:AZURE_CLIENT_ID = "YOUR Client ID from your Registered App in Microsoft Entra"

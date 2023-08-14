@@ -55,8 +55,6 @@ $Scopes = (Get-MgContext | Select-Object -ExpandProperty Scopes)
 Write-Host "Tenant: $tenantName" -ForegroundColor 'Cyan'
 Write-Host "AppRegistration: $AppRegistration" -ForegroundColor 'Magenta'
 Write-Host "Scopes: $Scopes" -ForegroundColor 'Cyan'
-Write-Warning "Press any key to continue or Ctrl+C to cancel"
-$null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
 # Define an array of groups
 $groups = @(

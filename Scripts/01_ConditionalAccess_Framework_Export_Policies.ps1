@@ -96,19 +96,15 @@ Write-Host ""
 Write-Host "Exported all Conditional Access policies for $($tenantName) to $($path)" -ForegroundColor 'Cyan'
 
 # Clean-Up: Remove all custom variables
-Write-Host "Remove all custom variables for security reasons" -ForegroundColor Cyan
+Write-Host "Remove all custom variables for security reasons" -ForegroundColor Magenta
 Remove-Item Env:AZURE_CLIENT_ID
 Remove-Item Env:AZURE_TENANT_ID
-Remove-Variable -Name Scopes
 Remove-Variable -Name Certificate
-Remove-Variable -Name file
-Remove-Variable -Name name
-Remove-Variable -Name path
-Remove-Variable -Name summary
-Remove-Variable -Name policies
-Remove-Variable -Name AppRegistration
 Remove-Variable -Name tenantName
-Remove-Variable -Name date
+Remove-Variable -Name AppRegistration
+Remove-Variable -Name Scopes
+Remove-Variable -Name policies
 Remove-Variable -Name policy
+Remove-Variable -Name summary
 
 Write-Host "Done."

@@ -42,7 +42,7 @@ $env:AZURE_CLIENT_ID = "YOUR Client ID from your App Registration in Microsoft E
 $env:AZURE_TENANT_ID = "YOUR Tenant ID"
 
 # Add environment variable with the Thumbprint of your Certificate
-$Certificate = "The Tumbprint of your Certificate"
+$Certificate = "A1F00086EC58E8F8500360797F0214A8F466FB63"
 
 # Connect to Microsoft Graph PowerShell SDK
 Connect-MgGraph -ClientId $env:AZURE_CLIENT_ID -TenantId $env:AZURE_TENANT_ID -CertificateThumbprint $Certificate
@@ -58,23 +58,23 @@ Write-Host "Scopes: $Scopes" -ForegroundColor 'Cyan'
 
 # Define an array of groups
 $groups = @(
-    'TEST1-CA-BreakGlassAccounts'
-    'TEST1-CA-Persona-Admins'
-    'TEST1-CA-Persona-Admins-Exclusions'
-    'TEST1-CA-Persona-AzureServiceAccounts'
-    'TEST1-CA-Persona-AzureServiceAccounts-Exclusions'
-    'TEST1-CA-Persona-Externals'
-    'TEST1-CA-Persona-Externals-Exclusions'
-    'TEST1-CA-Persona-Global-Exclusions'
-    'TEST1-CA-Persona-GuestAdmins'
-    'TEST1-CA-Persona-GuestAdmins-Exclusions'
-    'TEST1-CA-Persona-Guests-Exclusions'
-    'TEST1-CA-Persona-Internals'
-    'TEST1-CA-Persona-Internals-Exclusions'
-    'TEST1-CA-Persona-Microsoft365ServiceAccounts'
-    'TEST1-CA-Persona-Microsoft365ServiceAccounts-Exclusions'
-    'TEST1-CA-Persona-OnPremisesServiceAccounts'
-    'TEST1-CA-Persona-OnPremisesServiceAccounts-Exclusions'
+    'CA-BreakGlassAccounts'
+    'CA-Persona-Admins'
+    'CA-Persona-Admins-Exclusions'
+    'CA-Persona-AzureServiceAccounts'
+    'CA-Persona-AzureServiceAccounts-Exclusions'
+    'CA-Persona-Externals'
+    'CA-Persona-Externals-Exclusions'
+    'CA-Persona-Global-Exclusions'
+    'CA-Persona-GuestAdmins'
+    'CA-Persona-GuestAdmins-Exclusions'
+    'CA-Persona-Guests-Exclusions'
+    'CA-Persona-Internals'
+    'CA-Persona-Internals-Exclusions'
+    'CA-Persona-Microsoft365ServiceAccounts'
+    'CA-Persona-Microsoft365ServiceAccounts-Exclusions'
+    'CA-Persona-OnPremisesServiceAccounts'
+    'CA-Persona-OnPremisesServiceAccounts-Exclusions'
 )
 
 # Loop through the array and create security groups

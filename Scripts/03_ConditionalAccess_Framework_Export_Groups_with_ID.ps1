@@ -28,6 +28,12 @@ Date       Version   Author         Description
 14/08/23   1.1       Philipp Kohn   Changed Authentication to Certificate-based Auth, Optimized user prompts and environment variable clean-up.
 #>
 
+# Check PowerShell Version
+Write-Host "Check if running PowerShell Version 7.x" -ForegroundColor 'Cyan'
+if ($PSVersionTable.PSVersion.Major -lt 7) {
+    Throw "This script requires PowerShell 7 or a newer version."
+}
+
 # Try Discconnect Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor Cyan
 try{Disconnect-MgGraph -ErrorAction SilentlyContinue}catch{}
@@ -61,7 +67,7 @@ Declare output path variable with Path and Filename
     - You can use the existing CSV in the repo
 
 #>
-$OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Framework_Groups_w_ID_Source.csv"
+$OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Framework_Groups_w_ID_Target.csv"
 
 # Get all Microsoft Entra groups with display name starting with 'CA-' 
 # Select only the relevant properties

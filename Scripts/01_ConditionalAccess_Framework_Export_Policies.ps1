@@ -36,7 +36,7 @@ try{Disconnect-MgGraph -ErrorAction SilentlyContinue}catch{}
 
 
 # Add environment variables to be used by Connect-MgGraph
-$env:AZURE_CLIENT_ID = "YOUR Client ID from your Registered App in Microsoft Entra"
+$env:AZURE_CLIENT_ID = "YOUR Client ID from your App Registration in Microsoft Entra"
 $env:AZURE_TENANT_ID = "YOUR Tenant ID"
 
 # Add environment variable with the Thumbprint of your Certificate
@@ -96,4 +96,21 @@ Write-Host ""
 $summary | Sort-Object Name | Select-Object Name | Format-Table -AutoSize
 Write-Host ""
 Write-Host "Exported all Conditional Access policies for $($tenantName) to $($path)" -ForegroundColor 'Cyan'
+
+# Clean-Up: Remove all custom variables
+Write-Host "Remove all custom variables for security reasons" -ForegroundColor Cyan
+Remove-Item Env:AZURE_CLIENT_ID
+Remove-Item Env:AZURE_TENANT_ID
+Remove-Variable -Name Scopes
+Remove-Variable -Name Certificate
+Remove-Variable -Name file
+Remove-Variable -Name name
+Remove-Variable -Name path
+Remove-Variable -Name summary
+Remove-Variable -Name policies
+Remove-Variable -Name AppRegistration
+Remove-Variable -Name tenantName
+Remove-Variable -Name date
+Remove-Variable -Name policy
+
 Write-Host "Done."

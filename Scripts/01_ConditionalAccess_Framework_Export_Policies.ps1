@@ -1,18 +1,27 @@
 <#
-.SYNOPSIS 
-    Exports all Conditional Access policies from a tenant to separate JSON files.
+.SYNOPSIS
+Exports all Conditional Access policies from a tenant to separate JSON files.
 
 .DESCRIPTION
-    This script connects to the Microsoft Graph API and retrieves all Conditional Access policies from a tenant. It then creates a folder named after the built-in onmicrosoft.com domain name of the tenant and the date of the export, and exports each policy to a separate JSON file with its actual name. It also displays a summary of the exported policies in the shell.
+This script connects to the Microsoft Graph API to retrieve all Conditional Access policies from a tenant. After retrieval, it creates a directory named after the built-in onmicrosoft.com domain name of the tenant combined with the current date. Each policy is then exported to its designated JSON file within this directory. As a final step, the script displays a summary of the exported policies in the shell, ensuring users have a clear overview of the process.
 
 .OUTPUTS
-    A folder containing JSON files for each Conditional Access policy, and a summary table in the shell.
+A directory containing individual JSON files for each Conditional Access policy, accompanied by a summary table displayed within the shell.
 
 .NOTES
-    Author        Philipp Kohn, cloudcopilot.de, Twitter: @philipp_kohn
-    Change Log    V1.00, 15/07/2023 - Initial version
-    Change Log    V1.01, 12/08/2023 - Added query of TenantID to mitigate the risk of using the script in the wrong Tenant
-    Change Log    V1.02, 13/08/2023 - Colors and formating 
+File Name      : 01_ConditionalAccess_Framework_Export_Policies.ps1
+Author         : Philipp Kohn, Assisted by OpenAI's ChatGPT
+Prerequisite   : PowerShell 7.x or newer. Microsoft Graph PowerShell SDK.
+Copyright 2023 : cloudcopilot.de
+
+Change Log
+----------
+Date       Version   Author          Description
+--------   -------   ------          -----------
+15/07/23   1.0       Philipp Kohn    Initial version.
+12/08/23   1.1       Philipp Kohn    Added a query of TenantID to mitigate risks.
+13/08/23   1.2       Philipp Kohn    Improved colors and formatting.
+14/08/23   1.3       Philipp Kohn    Transitioned to Certificate-Based Authentication
 #>
 
 # Check PowerShell Version
@@ -21,28 +30,32 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
     Throw "This script requires PowerShell 7 or a newer version."
 }
 
-# Try Discconnect Microsoft Graph API
+# Try Disconnect Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor 'Magenta'
-try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
-
-# Connect to Microsoft Graph API
-Write-Host "Connecting to Microsoft Graph API..." -ForegroundColor 'Cyan'
-$RequiredScopes = @('User.Read.All', 'Organization.Read.All', 'Policy.Read.All')
-Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
-$TenantID = Read-Host
-if ($TenantID) {
-    Connect-MgGraph -Scopes $RequiredScopes -TenantId $TenantID -ErrorAction Stop
-} else {
-    Write-Warning "No Tenant ID entered, aborting the script"
-    exit
+try {
+    Disconnect-MgGraph -ErrorAction SilentlyContinue
+} catch {
+    Write-Host "Error disconnecting from Microsoft Graph: $_" -ForegroundColor 'Red'
 }
 
-# Get the built-in onmicrosoft.com domain name of the tenant
+# Add environment variables to be used by Connect-MgGraph
+$env:AZURE_CLIENT_ID = "YOUR Client ID from your Registered App in Microsoft Entra"
+$env:AZURE_TENANT_ID = "YOUR Tenant ID"
+
+# Add environment variable with the Thumbprint of your Certificate
+$Certificate = "The Tumbprint of your Certificate"
+
+# Connect to Microsoft Graph PowerShell SDK
+Connect-MgGraph -ClientId $env:AZURE_CLIENT_ID -TenantId $env:AZURE_TENANT_ID -CertificateThumbprint $Certificate
+
+# Connection Infos for Microsoft Graph PowerShell SDK Connection
 Write-Host "Getting the built-in onmicrosoft.com domain name of the tenant..."
 $tenantName = (Get-MgOrganization).VerifiedDomains | Where-Object {$_.IsInitial -eq $true} | Select-Object -ExpandProperty Name
-$CurrentUser = (Get-MgContext | Select-Object -ExpandProperty Account)
+$AppRegistration = (Get-MgContext | Select-Object -ExpandProperty AppName)
+$Scopes = (Get-MgContext | Select-Object -ExpandProperty Scopes)
 Write-Host "Tenant: $tenantName" -ForegroundColor 'Cyan'
-Write-Host "User: $CurrentUser" -ForegroundColor 'Magenta'
+Write-Host "AppRegistration: $AppRegistration" -ForegroundColor 'Magenta'
+Write-Host "Scopes: $Scopes" -ForegroundColor 'Cyan'
 Write-Warning "Press any key to continue or Ctrl+C to cancel"
 $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
@@ -77,12 +90,13 @@ foreach ($policy in $policies) {
         File = $file
     }
 }
+
 #Disconnect Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor 'Magenta' 
 Disconnect-MgGraph
 
 Write-Host ""
-$summary | Format-Table -AutoSize
+$summary | Sort-Object Name | Select-Object Name | Format-Table -AutoSize
 Write-Host ""
 Write-Host "Exported all Conditional Access policies for $($tenantName) to $($path)" -ForegroundColor 'Cyan'
 Write-Host "Done."

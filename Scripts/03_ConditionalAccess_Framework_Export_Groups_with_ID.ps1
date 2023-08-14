@@ -1,41 +1,55 @@
-<# 
+<#
 .SYNOPSIS
-    This script connects to Microsoft Graph API and exports a list of groups with a specific prefix to a CSV file.
+Connects to Microsoft Graph API and exports a list of groups with a specific prefix to a CSV file.
 
 .DESCRIPTION
-    - This script checks the PowerShell version and requires PowerShell 7 or newer.
-    - It disconnects from any existing Microsoft Graph API sessions and connects to a new one 
-    - It then uses Get-MgGroup to filter the groups that start with ‘CA-’ and selects their DisplayName, Description, and Id properties. 
-    - Finally, it exports the results to a CSV file in a specified path.
+- This script initiates by checking the PowerShell version, ensuring it's 7 or newer. 
+- It then disconnects from any active Microsoft Graph API sessions and establishes a new connection using specified environment variables and a certificate thumbprint. 
+- The script proceeds to filter groups that start with 'CA-' using the Get-MgGroup cmdlet and selects their DisplayName, Description, and Id properties. 
+- Finally, the results are exported to a specified CSV file.
 
 .PARAMETER
-    OutputPath The path where the CSV file will be saved.
+OutputPath: Specifies the path where the CSV file will be saved.
 
 .OUTPUTS
-    A CSV file with the group information.
+A CSV file containing information about the filtered groups.
 
+.NOTES
+File Name      : 03_ConditionalAccess_Framework_Export_Groups_with_ID.ps1
+Author         : Philipp Kohn, Assisted by OpenAI's ChatGPT
+Prerequisite   : PowerShell 7.x or newer. Microsoft Graph PowerShell SDK.
+Copyright 2023 : cloudcopilot.de
+
+Change Log
+----------
+Date       Version   Author         Description
+--------   -------   ------         -----------
+15/07/23   1.0       Philipp Kohn   Initial version.
+14/08/23   1.1       Philipp Kohn   Changed Authentication to Certificate-based Auth, Optimized user prompts and environment variable clean-up.
 #>
-
-# Check PowerShell Version
-if ($PSVersionTable.PSVersion.Major -lt 7) {
-    Throw "This script requires PowerShell 7 or a newer version."
-}
 
 # Try Discconnect Microsoft Graph API
 Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundColor Cyan
-try{Disconnect-MgGraph -force -ErrorAction SilentlyContinue}catch{}
+try{Disconnect-MgGraph -ErrorAction SilentlyContinue}catch{}
 
-# Connect to Microsoft Graph API
-Write-Host "Connecting to Microsoft Graph API..." -ForegroundColor Magenta
-$RequiredScopes = @('User.Read.All', 'Organization.Read.All', 'Policy.Read.All')
-Write-Warning "Enter the Tenant ID of the tenant you want to connect to or leave blank to cancel"
-$TenantID = Read-Host
-if ($TenantID) {
-    Connect-MgGraph -Scopes $RequiredScopes -TenantId $TenantID -ErrorAction Stop
-} else {
-    Write-Warning "No Tenant ID entered, aborting the script"
-    exit
-}
+# Add environment variables to be used by Connect-MgGraph
+$env:AZURE_CLIENT_ID = "c9373923-547e-428a-915d-cfe2470f586f"
+$env:AZURE_TENANT_ID = "e8d58456-3546-4289-b2a2-b9ac3a1eca0f"
+
+# Add environment variable with the Thumbprint of your Certificate
+$Certificate = "A1F00086EC58E8F8500360797F0214A8F466FB63"
+
+# Connect to Microsoft Graph PowerShell SDK
+Connect-MgGraph -ClientId $env:AZURE_CLIENT_ID -TenantId $env:AZURE_TENANT_ID -CertificateThumbprint $Certificate
+
+# Connection Infos for Microsoft Graph PowerShell SDK Connection
+Write-Host "Getting the built-in onmicrosoft.com domain name of the tenant..." -ForegroundColor Magenta
+$tenantName = (Get-MgOrganization).VerifiedDomains | Where-Object {$_.IsInitial -eq $true} | Select-Object -ExpandProperty Name
+$AppRegistration = (Get-MgContext | Select-Object -ExpandProperty AppName)
+$Scopes = (Get-MgContext | Select-Object -ExpandProperty Scopes)
+Write-Host "Tenant: $tenantName" -ForegroundColor 'Cyan'
+Write-Host "AppRegistration: $AppRegistration" -ForegroundColor 'Magenta'
+Write-Host "Scopes: $Scopes" -ForegroundColor 'Cyan'
 
 <# 
 Declare output path variable with Path and Filename
@@ -47,7 +61,7 @@ Declare output path variable with Path and Filename
     - You can use the existing CSV in the repo
 
 #>
-$OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Framework_Groups_w_ID_Target.csv"
+$OutputPath = Join-Path -Path "C:\Scripts\" -ChildPath "Conditional_Access_Framework_Groups_w_ID_Source.csv"
 
 # Get all Microsoft Entra groups with display name starting with 'CA-' 
 # Select only the relevant properties
@@ -61,6 +75,16 @@ Disconnect-MgGraph
 Write-Host ""
 Write-Host "Exported Groups with ID for Mapping Table to prepare exported CA Policy JSON Files with new Group ID" -ForegroundColor Magenta
 Write-Host "Output Path: $OutputPath" -ForegroundColor Cyan
+
+# Clean-Up: Remove all custom variables
+Write-Host "Remove all custom variables for security reasons" -ForegroundColor Magenta
+Remove-Item Env:AZURE_CLIENT_ID
+Remove-Item Env:AZURE_TENANT_ID
+Remove-Variable -Name Scopes
+Remove-Variable -Name Certificate
+Remove-Variable -Name AppRegistration
+Remove-Variable -Name tenantName
+Remove-Variable -Name OutputPath
 
 Write-Host ""
 Write-Host "Done."

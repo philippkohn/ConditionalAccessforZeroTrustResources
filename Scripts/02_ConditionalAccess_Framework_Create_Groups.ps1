@@ -90,7 +90,7 @@ Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundCo
 Disconnect-MgGraph
 
 # Clean-Up: Remove all custom variables
-Write-Host "Remove all custom variables for security reasons" -ForegroundColor Cyan
+Write-Host "Remove all custom variables for security reasons" -ForegroundColor Magenta
 Remove-Item Env:AZURE_CLIENT_ID
 Remove-Item Env:AZURE_TENANT_ID
 Remove-Variable -Name Scopes
@@ -101,7 +101,7 @@ Remove-Variable -Name AppRegistration
 Remove-Variable -Name tenantName
 
 Write-Host ""
-Write-Host "Created all needed Security Groups for the Conditional Access Framework from Microsoft employee - Claus Jespersen; Change 10.08.23 only one exclusion Group per Persona" -ForegroundColor Magenta
+Write-Host "Created all needed Security Groups for the Conditional Access Framework from Microsoft employee - Claus Jespersen; Change 10.08.23 only one exclusion Group per Persona" -ForegroundColor Cyan
 
 Write-Host ""
 Write-Host "Done."

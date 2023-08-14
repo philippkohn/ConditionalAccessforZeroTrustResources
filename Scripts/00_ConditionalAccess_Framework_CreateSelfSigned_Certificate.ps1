@@ -22,6 +22,7 @@ Change Log
 Date       Version   Author          Description
 --------   -------   ------          -----------
 14/08/23   1.0       Philipp Kohn    Initial creation with assistance from OpenAI's ChatGPT.
+14/08/23   1.1       Philipp Kohn    Changed the common Name to the Tenant Name
 #>
 
 
@@ -36,8 +37,7 @@ $certParams = @{
     NotAfter          = (Get-Date).AddYears(1)
     NotBefore         = Get-Date
     DnsName           = $dnsName
-    #KeyProtection     = 'Protect'
-    Subject           = "GivenName=Philipp, Surname=Kohn, E=webmaster@cloudcopilot.de"
+    Subject           = "CN=$DnsName, GivenName=Philipp, Surname=Kohn, E=webmaster@cloudcopilot.de"
 }
 
 # Create the self-signed certificate

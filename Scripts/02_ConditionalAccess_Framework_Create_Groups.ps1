@@ -42,7 +42,7 @@ $env:AZURE_CLIENT_ID = "YOUR Client ID from your App Registration in Microsoft E
 $env:AZURE_TENANT_ID = "YOUR Tenant ID"
 
 # Add environment variable with the Thumbprint of your Certificate
-$Certificate = "A1F00086EC58E8F8500360797F0214A8F466FB63"
+$Certificate = "The Tumbprint of your Certificate"
 
 # Connect to Microsoft Graph PowerShell SDK
 Connect-MgGraph -ClientId $env:AZURE_CLIENT_ID -TenantId $env:AZURE_TENANT_ID -CertificateThumbprint $Certificate

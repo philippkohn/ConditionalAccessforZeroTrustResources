@@ -33,11 +33,11 @@ Write-Host "Disconnect from existing Microsoft Graph API Sessions" -ForegroundCo
 try{Disconnect-MgGraph -ErrorAction SilentlyContinue}catch{}
 
 # Add environment variables to be used by Connect-MgGraph
-$env:AZURE_CLIENT_ID = "c9373923-547e-428a-915d-cfe2470f586f"
-$env:AZURE_TENANT_ID = "e8d58456-3546-4289-b2a2-b9ac3a1eca0f"
+$env:AZURE_CLIENT_ID = "YOUR Client ID from your App Registration in Microsoft Entra"
+$env:AZURE_TENANT_ID = "YOUR Tenant ID"
 
 # Add environment variable with the Thumbprint of your Certificate
-$Certificate = "A1F00086EC58E8F8500360797F0214A8F466FB63"
+$Certificate = "The Tumbprint of your Certificate"
 
 # Connect to Microsoft Graph PowerShell SDK
 Connect-MgGraph -ClientId $env:AZURE_CLIENT_ID -TenantId $env:AZURE_TENANT_ID -CertificateThumbprint $Certificate

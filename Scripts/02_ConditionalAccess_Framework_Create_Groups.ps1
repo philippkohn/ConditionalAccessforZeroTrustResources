@@ -3,7 +3,14 @@
 Connects to Microsoft Graph API, creates security groups for conditional access policies, and fetches the tenant name and user context.
 
 .DESCRIPTION
-This script initiates by verifying the PowerShell version and disconnecting from any existing Microsoft Graph API sessions. It then establishes a connection to the Microsoft Graph API using the specified environment variables and certificate thumbprint. Post connection, it fetches the built-in onmicrosoft.com domain name of the tenant and retrieves the current user context. Users are prompted to confirm the tenant details. Once confirmed, the script proceeds to create the necessary security groups for the Conditional Access Framework. On completion, the script disconnects from the Microsoft Graph API and provides a summary of the created groups.
+- The script first ensures that it's running on PowerShell Version 7.x or newer.
+- It attempts to disconnect any existing sessions with Microsoft Graph API.
+- Environment variables are set for authentication.
+- The user connects to the Microsoft Graph PowerShell SDK using client credentials and a certificate thumbprint.
+- Retrieves the built-in onmicrosoft.com domain name of the tenant and displays the connection details.
+- The script proceeds to create the necessary security groups for the Conditional Access Framework. 
+- On completion, the script disconnects from the Microsoft Graph API and provides a summary of the created groups.
+- Includes cleanup operations to remove sensitive data from the session.
 
 .OUTPUTS
 A confirmation of the created security groups in the Microsoft Graph, accompanied by a summary of the operations executed.
@@ -23,6 +30,7 @@ Date       Version   Author         Description
 12/08/23   1.2       Philipp Kohn   Added query of TenantID to mitigate risks.
 13/08/23   1.3       Philipp Kohn   Modified to use a loop for group creation.
 14/08/23   1.4       Philipp Kohn   Changed Authentication to Certificate-based Auth, Optimized user prompts and environment variable clean-up.
+18/08/23   1.5       Philipp Kohn   Tested in Lab, updated some comments
 #>
 
 

@@ -25,7 +25,7 @@ Date       Version   Author         Description
 14/08/23   1.0       Philipp Kohn   Rebuild from scratch, optimized for simplicity, added status updates, and formatted documentation.
 18/08/23   1.1       Philipp Kohn   Tested in Lab, updated some comments
 
-*** At the moment the script is only updating the Groups in the JSON files, so other ID based Objects have to be changed manually in the JSON Files, I may be implement that in a future Version ***
+*** At the moment the script is only updating the Groups in the JSON files, so other ID based Objects have to be changed manually, I may be implement that in a future Version ***
 #>
 
 # Check PowerShell Version

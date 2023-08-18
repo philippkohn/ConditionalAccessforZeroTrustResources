@@ -1,13 +1,13 @@
 <#
 .SYNOPSIS
-Connects to Microsoft Graph API and updates the group IDs in JSON files for conditional access policies to prepare them for Import.
+Updates the group IDs in JSON files for conditional access policies to prepare them for Import in another Tenant
 
 .DESCRIPTION
 - This script initiates by checking if the PowerShell version is 7 or newer.
 - It then prompts the user for the file path for the source and target group mappings CSV files and the folder path for the JSON files.
 - The script imports source and target groups from the CSV files and creates a hashtable to map old IDs to new IDs.
 - It then fetches all JSON files from the specified path and loops through each file, replacing the group IDs in the conditions.users.excludeGroups and conditions.users.includeGroups properties using the hashtable.
-- Finally, the updated content overwrites the original JSON files.
+- Finally, the updated content overwrites the original JSON files
 
 .OUTPUTS
 The script modifies the JSON files in place with updated group IDs.
@@ -23,6 +23,9 @@ Change Log
 Date       Version   Author         Description
 --------   -------   ------         -----------
 14/08/23   1.0       Philipp Kohn   Rebuild from scratch, optimized for simplicity, added status updates, and formatted documentation.
+18/08/23   1.1       Philipp Kohn   Tested in Lab, updated some comments
+
+*** At the moment the script is only updating the Groups in the JSON files, so other ID based Objects have to be changed manually in the JSON Files, I may be implement that in a future Version ***
 #>
 
 # Check PowerShell Version

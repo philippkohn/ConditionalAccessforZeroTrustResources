@@ -25,7 +25,19 @@ Date       Version   Author         Description
 14/08/23   1.0       Philipp Kohn   Rebuild from scratch, optimized for simplicity, added status updates, and formatted documentation.
 18/08/23   1.1       Philipp Kohn   Tested in Lab, updated some comments
 
-*** At the moment the script is only updating the Groups in the JSON files, so other ID based Objects have to be changed manually, I may be implement that in a future Version ***
+*** When you are using this script to Deploy the Sample Policies from https://github.com/philippkohn/ConditionalAccessforZeroTrustResources/tree/main/ConditionalAccessSamplePolicies
+    you have to recreate the Microsoft Entra Terms of Use Policies (ToU) manually. Grab the ID with "Get-MgAgreement | fl Displayname, Id" in Lab Tenant there were two ToU Polices
+   
+    DisplayName : Contoso - Terms of Use - GuestAdmins
+    Id          : 6551cec0-1d10-422b-a9d0-9e447e0a8353
+
+    DisplayName : Contoso - Terms of Use - Guests
+    Id          : 0272f2a4-dba2-4135-8197-563b3a420d34 
+   
+    Please use this PowerPoint Slides for further Information: 
+    https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fphilippkohn%2FConditionalAccessforZeroTrustResources%2Fmain%2FConditional%2520Access%2520for%2520Zero%2520Trust%2520-%2520Philipp%2520Kohn%2520-%252011-08-13.ppsx&wdOrigin=BROWSELINK
+
+***
 #>
 
 # Check PowerShell Version

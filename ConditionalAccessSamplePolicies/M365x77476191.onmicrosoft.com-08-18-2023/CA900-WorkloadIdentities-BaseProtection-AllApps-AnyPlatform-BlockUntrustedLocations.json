@@ -1,0 +1,56 @@
+{
+  "displayName": "CA900-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
+  "grantControls": {
+    "authenticationStrength": null,
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('4a016c35-5744-400b-b922-5e883101c7cc')/grantControls/authenticationStrength/$entity",
+    "builtInControls": [
+      "block"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "operator": "OR"
+  },
+  "templateId": null,
+  "conditions": {
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "userRiskLevels": [],
+    "platforms": null,
+    "clientApplications": null,
+    "applications": {
+      "excludeApplications": [],
+      "applicationFilter": null,
+      "includeApplications": [
+        "All"
+      ],
+      "includeAuthenticationContextClassReferences": [],
+      "includeUserActions": []
+    },
+    "devices": null,
+    "locations": {
+      "includeLocations": [
+        "All"
+      ],
+      "excludeLocations": [
+        "AllTrusted"
+      ]
+    },
+    "users": {
+      "excludeGroups": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "includeUsers": [
+        "None"
+      ],
+      "includeRoles": [],
+      "excludeUsers": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeGroups": []
+    },
+    "servicePrincipalRiskLevels": []
+  },
+  "sessionControls": null,
+  "state": "disabled"
+}

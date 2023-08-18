@@ -1,0 +1,59 @@
+{
+  "displayName": "CA004-Global-BaseProtection-AllApps-AnyPlatform-MFAforDeviceRegistration",
+  "grantControls": {
+    "authenticationStrength": null,
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('005b60af-92b8-4a3a-bcc4-19a4006d00d3')/grantControls/authenticationStrength/$entity",
+    "builtInControls": [
+      "mfa"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "operator": "OR"
+  },
+  "templateId": null,
+  "conditions": {
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "userRiskLevels": [],
+    "platforms": null,
+    "clientApplications": null,
+    "applications": {
+      "excludeApplications": [],
+      "applicationFilter": null,
+      "includeApplications": [],
+      "includeAuthenticationContextClassReferences": [],
+      "includeUserActions": [
+        "urn:user:registerdevice"
+      ]
+    },
+    "devices": null,
+    "locations": {
+      "includeLocations": [
+        "All"
+      ],
+      "excludeLocations": [
+        "0f0dcced-3f76-43f7-bc4f-2bcca0ef1d45"
+      ]
+    },
+    "users": {
+      "excludeGroups": [
+        "ee2bdc01-80c2-4e28-9882-858bcfa005bf",
+        "e9378db0-32a2-4441-9e40-007f7c8388c8"
+      ],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "includeUsers": [
+        "All"
+      ],
+      "includeRoles": [],
+      "excludeUsers": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeGroups": []
+    },
+    "servicePrincipalRiskLevels": []
+  },
+  "sessionControls": null,
+  "state": "disabled"
+}

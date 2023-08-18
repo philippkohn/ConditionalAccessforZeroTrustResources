@@ -6,7 +6,7 @@ Connects to Microsoft Graph API and exports a list of groups with a specific pre
 - The script first ensures that it's running on PowerShell Version 7.x or newer.
 - It attempts to disconnect any existing sessions with Microsoft Graph API.
 - Environment variables are set for authentication.
-- The user connects to the Microsoft Graph PowerShell SDK using client credentials and a certificate thumbprint.
+- Then it connects the Microsoft Graph PowerShell SDK using client credentials and a certificate thumbprint.
 - Retrieves the built-in onmicrosoft.com domain name of the tenant and displays the connection details.
 - The script proceeds to filter groups that start with 'CA-' using the Get-MgGroup cmdlet and selects their DisplayName, Description, and Id properties. 
 - Finally, the results are exported to a specified CSV file.

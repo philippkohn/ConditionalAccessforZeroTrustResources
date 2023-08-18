@@ -1,0 +1,56 @@
+{
+  "displayName": "CA401-Guests-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
+  "grantControls": {
+    "authenticationStrength": null,
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('459daefb-6a27-4677-9983-a04c54d681e8')/grantControls/authenticationStrength/$entity",
+    "builtInControls": [],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [
+      "0272f2a4-dba2-4135-8197-563b3a420d34"
+    ],
+    "operator": "OR"
+  },
+  "templateId": null,
+  "conditions": {
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "userRiskLevels": [],
+    "devices": null,
+    "platforms": null,
+    "clientApplications": null,
+    "applications": {
+      "excludeApplications": [],
+      "applicationFilter": null,
+      "includeApplications": [],
+      "includeAuthenticationContextClassReferences": [],
+      "includeUserActions": [
+        "urn:user:registersecurityinfo"
+      ]
+    },
+    "locations": null,
+    "users": {
+      "excludeGroups": [
+        "ee2bdc01-80c2-4e28-9882-858bcfa005bf",
+        "12f31775-9375-4003-8e66-3052e972f99d"
+      ],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": {
+        "guestOrExternalUserTypes": "b2bCollaborationGuest,serviceProvider",
+        "externalTenants": {
+          "@odata.type": "#microsoft.graph.conditionalAccessAllExternalTenants",
+          "membershipKind": "all"
+        }
+      },
+      "includeUsers": [],
+      "includeRoles": [],
+      "excludeUsers": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeGroups": []
+    },
+    "servicePrincipalRiskLevels": []
+  },
+  "sessionControls": null,
+  "state": "disabled"
+}

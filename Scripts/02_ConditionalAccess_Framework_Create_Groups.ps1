@@ -6,7 +6,7 @@ Connects to Microsoft Graph API, creates security groups for conditional access 
 - The script first ensures that it's running on PowerShell Version 7.x or newer.
 - It attempts to disconnect any existing sessions with Microsoft Graph API.
 - Environment variables are set for authentication.
-- The user connects to the Microsoft Graph PowerShell SDK using client credentials and a certificate thumbprint.
+- Then it connects the Microsoft Graph PowerShell SDK using client credentials and a certificate thumbprint.
 - Retrieves the built-in onmicrosoft.com domain name of the tenant and displays the connection details.
 - The script proceeds to create the necessary security groups for the Conditional Access Framework. 
 - On completion, the script disconnects from the Microsoft Graph API and provides a summary of the created groups.

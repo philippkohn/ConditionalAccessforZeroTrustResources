@@ -1,0 +1,65 @@
+{
+  "displayName": "CA001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas",
+  "grantControls": {
+    "authenticationStrength": null,
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('b21f2fa6-60bd-4b54-a4ce-62cf2dcd61da')/grantControls/authenticationStrength/$entity",
+    "builtInControls": [
+      "block"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "operator": "OR"
+  },
+  "templateId": null,
+  "conditions": {
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "userRiskLevels": [],
+    "devices": null,
+    "platforms": null,
+    "clientApplications": null,
+    "applications": {
+      "excludeApplications": [],
+      "applicationFilter": null,
+      "includeApplications": [
+        "All"
+      ],
+      "includeAuthenticationContextClassReferences": [],
+      "includeUserActions": []
+    },
+    "locations": null,
+    "users": {
+      "excludeGroups": [
+        "ee2bdc01-80c2-4e28-9882-858bcfa005bf",
+        "b86af40e-e4f0-4e83-a2bb-ef5321269384",
+        "2bda5037-6b74-4892-b5ab-5b8b1c20cfed",
+        "2a5e5a3b-43a6-46cd-aa10-c8900531e609",
+        "af2ce85a-5d4e-4f7e-a04b-468cd6a29699",
+        "3ac3875d-8457-422b-9097-8b76ae7bf75c",
+        "40faab60-cf39-4f9d-a890-bdd59622c497",
+        "ff9425a4-9987-4f55-a560-2d214e7e234e",
+        "e9378db0-32a2-4441-9e40-007f7c8388c8"
+      ],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "includeUsers": [
+        "All"
+      ],
+      "includeRoles": [],
+      "excludeUsers": [],
+      "excludeGuestsOrExternalUsers": {
+        "guestOrExternalUserTypes": "b2bCollaborationGuest,serviceProvider",
+        "externalTenants": {
+          "@odata.type": "#microsoft.graph.conditionalAccessAllExternalTenants",
+          "membershipKind": "all"
+        }
+      },
+      "includeGroups": []
+    },
+    "servicePrincipalRiskLevels": []
+  },
+  "sessionControls": null,
+  "state": "disabled"
+}

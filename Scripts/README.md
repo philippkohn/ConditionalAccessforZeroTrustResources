@@ -25,14 +25,14 @@ For a visualized version, please view these slides:
     - Microsoft.Graph.Identity.Governance
     - Microsoft.Graph.Identity.SignIns
     - Microsoft.Graph.Identity.Users
-- Creation of an App Registration in Azure AD for Authentication.
+- Creation of an App Registration in Microsoft Entra for Authentication.
 
 ## Configuration
 
 Ensure you have the following configurations set:
 
 - Application (client) ID of the App Registration.
-- Tenant IDs for your Azure AD.
+- Tenant IDs for your Microsoft Entra Environment (Source and Target Tenant).
 
 ## Scripts Overview
 

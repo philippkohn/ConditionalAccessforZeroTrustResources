@@ -15,6 +15,14 @@ I am a Microsoft 365 and Microsoft Entra Consultant and an enthusiast of the Per
 
 Please start by setting up a Microsoft 365 Test/Lab environment to test the provided scripts. Exercise caution when using these scripts to avoid locking yourself out! Note that these scripts are provided without any warranties.
 
+For further information about the Framework, please refer to:
+- [ConditionalAccessGovernanceAndPrinciplesforZeroTrust May 2022.pdf](<../ConditionalAccessGovernanceAndPrinciplesforZeroTrust May 2022.pdf>)
+
+For a visualized version, please view these slides:
+- [Conditional Access for Zero Trust - Philipp Kohn - 11-08-13.ppsx](<https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fphilippkohn%2FConditionalAccessforZeroTrustResources%2Fmain%2FConditional%2520Access%2520for%2520Zero%2520Trust%2520-%2520Philipp%2520Kohn%2520-%252011-08-13.ppsx&wdOrigin=BROWSELINK>)
+
+**Target Audience**: Primarily tailored for Microsoft 365 Admins and Microsoft Entra Admins.
+
 ## Project Dependencies
 
 This project leverages the Microsoft Graph PowerShell SDK and requires PowerShell 7.x (Core) for execution.

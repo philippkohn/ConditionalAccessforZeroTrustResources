@@ -1,10 +1,16 @@
 # Conditional Access Sample Policies for Zero Trust
 
 ## Folder Purpose
-This subfolder contains the Conditional Access Sample Policies crafted for the Conditional Access Framework for Zero Trust.
+This subfolder contains all the Conditional Access policies exported from my lab environment using the scripts provided in this repository. These policies are prepped for importing into another tenant.
 
 ## Policies Origin
 These policies were manually created by @philippkohn in a Contoso Test Environment. They were subsequently exported using the scripts located in the `/Scripts` folder of this repository.
+
+For further information about the Framework, please refer to:
+- [ConditionalAccessGovernanceAndPrinciplesforZeroTrust May 2022.pdf](<../ConditionalAccessGovernanceAndPrinciplesforZeroTrust May 2022.pdf>)
+
+For a visualized version, please view these slides:
+- [Conditional Access for Zero Trust - Philipp Kohn - 11-08-13.ppsx](<https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fphilippkohn%2FConditionalAccessforZeroTrustResources%2Fmain%2FConditional%2520Access%2520for%2520Zero%2520Trust%2520-%2520Philipp%2520Kohn%2520-%252011-08-13.ppsx&wdOrigin=BROWSELINK>)
 
 ## Policy Count
 As of the last documentation, there are 52 exported policies located in `/ConditionalAccessSamplePolicies/M365x77476191.onmicrosoft.com-08-18-2023`.

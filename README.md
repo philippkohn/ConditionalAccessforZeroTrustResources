@@ -1,38 +1,43 @@
-# Project
+# Persona Based Conditional Access Framework for Zero Trust
 
-This repository holds some Conditional Access resources that complement the Azure Architecture design note "Conditional Access Guidance for Zero Trust".
-See more here for a description on CA configured for Zero Trust 
+![Alt text](Readme_Headline.png)
 
-https://docs.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-zero-trust?msclkid=d1768a34ceda11ec9b6c8f244f8d05bd and
+## Project Overview
 
-https://www.linkedin.com/posts/claus-jespersen-25b0422_conditional-access-guidance-december-2021-ugcPost-6872879150634450944-TXP5?utm_source=linkedin_share&utm_medium=member_desktop_web.
+I am a Microsoft 365 and Microsoft Entra Consultant and an enthusiast of the Persona Based Conditional Access Framework for Zero Trust by [@clajes](https://github.com/clajes). Having manually created over 50 policies, I sought an uncomplicated way to deploy them across other Azure AD Tenants. Rather than using Microsoft365DSC, I crafted my own solution, delving deep into the Microsoft Graph PowerShell SDK in the process.
 
-- ConditionalAccessSamplePolicies folder holds an Excel Spreadsheet documenting the suggested set of policies
-- ConditionalAccessSamplePolicies\Microsoft365DSCCAGroups folder has a Microsoft365dsc file to automate the creation of groups used for the CA policies
-- ConditionalAccessSamplePolicies\Microsoft365DSCCAPolicies folder has a Microsoft365dsc file to automate the creation of CA policies 
-- Workbooks folder has enhanced workbooks to look at CA policies and compliancy as well as a troubleshooing solution for Always-On VPN including a workbook for that.
-- Presentations folder has a few presentations that I have given about CA configured for Zero Trust
+## Repository Structure
 
-see other readme files in the sub-folders for further details.
+- `/ConditionalAccessSamplePolicies`: This subfolder contains all the Conditional Access policies exported from my lab environment using the scripts provided in this repository. These policies are prepped for importing into another tenant.
+- `/Scripts/`: Here, you'll find all the scripts to export and import Conditional Access policies for your tenant.
 
-## Contributing
+## Getting Started
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+Please start by setting up a Microsoft 365 Test/Lab environment to test the provided scripts. Exercise caution when using these scripts to avoid locking yourself out! Note that these scripts are provided without any warranties.
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+## Project Dependencies
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+This project leverages the Microsoft Graph PowerShell SDK and requires PowerShell 7.x (Core) for execution.
 
-## Trademarks
+## Contributors & Acknowledgments
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+Special thanks to:
+- [@clajes](https://github.com/clajes) for his foundational Conditional Access Framework for Zero Trust.
+- [@merill](https://github.com/merill) for the idpowertoys.com toolkit, which was invaluable during the creation of this repository.
+
+## Versioning & Releases
+
+Currently, there are no plans for new major releases.
+
+## Feedback & Contributions
+
+You can connect with me on Twitter [@philipp_kohn](https://twitter.com/philipp_kohn) or on LinkedIn [here](https://www.linkedin.com/in/philippkohn/). As this is a community project, I appreciate your understanding if responses are not immediate.
+
+## Licensing & Usage Rights
+
+This project adheres to the licensing of the original repository. For details, please refer to the LICENSE information within the repo.
+
+## Future Roadmap
+
+At present, there are no plans for new major releases or updates.
+

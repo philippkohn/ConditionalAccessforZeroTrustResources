@@ -13,7 +13,7 @@ I am a Microsoft 365 and Microsoft Entra Consultant and an enthusiast of the Per
 
 ## Getting Started
 
-Please start by setting up a Microsoft 365 Test/Lab environment to test the provided scripts. Exercise caution when using these scripts to avoid locking yourself out! Note that these scripts are provided without any warranties.
+Please start by setting up a Microsoft 365 Test/Lab environment for testing purposes. Exercise caution when using these scripts to avoid locking yourself out! Note that these scripts are provided without any warranties.
 
 For further information about the Framework, please refer to:
 - [ConditionalAccessGovernanceAndPrinciplesforZeroTrust May 2022.pdf](<../ConditionalAccessGovernanceAndPrinciplesforZeroTrust May 2022.pdf>)

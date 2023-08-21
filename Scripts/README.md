@@ -36,8 +36,6 @@ Ensure you have the following configurations set:
 
 ## Scripts Overview
 
-## Scripts Overview
-
 ### 1. Create Self-Signed Certificate
 
 **Filename**: `00_ConditionalAccess_Framework_CreateSelfSigned_Certificate.ps1`

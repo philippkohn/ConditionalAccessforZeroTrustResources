@@ -4,7 +4,7 @@
 
 ![Alt text](Readme_Headline.png)
 
-This repository contains a set of PowerShell scripts designed to manage and manipulate Microsoft Entra Conditional Access policies using the Microsoft Graph PowerShell SDK. These scripts streamline the process of exporting, modifying, and importing policies across different Microsoft tenants. Initially, they were written to export and import the policies for the Conditional Access Framework for Zero Trust by @clajes.
+This repository contains a set of PowerShell scripts designed to manage and manipulate Microsoft Entra Conditional Access policies using the Microsoft Graph PowerShell SDK. These scripts streamline the process of exporting, modifying, and importing policies across different Microsoft tenants. Initially, they were written to export and import the policies for the Conditional Access Framework for Zero Trust by [@clajes](<https://github.com/clajes>).
 
 For further information about the Framework, please refer to:
 - [ConditionalAccessGovernanceAndPrinciplesforZeroTrust May 2022.pdf](<../ConditionalAccessGovernanceAndPrinciplesforZeroTrust May 2022.pdf>)

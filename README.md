@@ -43,7 +43,7 @@ You can connect with me on Twitter [@philipp_kohn](https://twitter.com/philipp_k
 
 ## Licensing & Usage Rights
 
-This project adheres to the licensing of the original repository. For details, please refer to the LICENSE information within the repo.
+This project adheres to the licensing of the original repository. For details, please refer to the [Title](LICENSE) information within the repo.
 
 ## Future Roadmap
 

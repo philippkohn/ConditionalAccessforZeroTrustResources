@@ -111,7 +111,7 @@ Errors encountered during the execution of these scripts will be output to the S
 
 ## Related Resources
 
-For a deeper dive into using PowerShell with the Microsoft Graph, visit [this Microsoft documentation](https://learn.microsoft.com/en-us/powershell/microsoftgraph/app-only?view=graph-powershell-1.0).
+For a deeper dive into using PowerShell with the Microsoft Graph, visit [this Microsoft documentation](https://learn.microsoft.com/en-us/powershell/microsoftgraph).
 
 ## Contribution
 

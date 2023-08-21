@@ -1,24 +1,31 @@
-Conditional Access for Zero Trust - Sample Policies
------------------------------------------------------
-Instead of Microsoft365DSC, I decided to use Microsoft Graph PowerShell Scripts.
-Because I find Microsoft365DSC too cumbersome in daily business.
+# Conditional Access Sample Policies for Zero Trust
 
-In the **directory [M365x77476191.onmicrosoft.com-08-10-2023](https://github.com/philippkohn/ConditionalAccessforZeroTrustResources/tree/main/ConditionalAccessSamplePolicies/M365x77476191.onmicrosoft.com-08-10-2023)** are example policies that are based on the Conditional Access Framework for Zero Trust Framework from "Microsoft - Claus Jespersen" and largely adhere to the framework guidelines.
+## Folder Purpose
+This subfolder contains the Conditional Access Sample Policies crafted for the Conditional Access Framework for Zero Trust.
 
-> **Disclaimer**
-> - Please test the Conditional Access Sample Policies in your Microsoft 365 Dev Environment before Production use!
-> - Use a Break Glass Account - Don't shoot yourself in the foot ⚠️
+## Policies Origin
+These policies were manually created by @philippkohn in a Contoso Test Environment. They were subsequently exported using the scripts located in the `/Scripts` folder of this repository.
 
-Change Log
------------------------------------------------------
-- Using only one exclusion Group per Persona
-- ...
-- ...
-- To be completed
+## Policy Count
+As of the last documentation, there are 52 exported policies located in `/ConditionalAccessSamplePolicies/M365x77476191.onmicrosoft.com-08-18-2023`.
 
-Further Information
------------------------------------------------------
-*See more here for a description on CA configured for Zero Trust*
-- [Conditional Access for Zero Trust - Azure Architecture Center | Microsoft Learn](https://learn.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-zero-trust)
-- [Conditional Access framework and policies - Azure Architecture Center | Microsoft Learn](https://learn.microsoft.com/en-us/azure/architecture/guide/security/conditional-access-framework)
-- [Readme of the original repo using Microsoft365DSC](https://github.com/microsoft/ConditionalAccessforZeroTrustResources/blob/main/ConditionalAccessSamplePolicies/readme.md)
+## Policy Format
+All policies are provided in the JSON format.
+
+## Usage Instructions
+These policies can be imported either manually via the Microsoft Entra Admin Center Webinterface or using the scripts provided in this repository.
+
+## Safety & Precautions 
+Please exercise caution when implementing these policies. Always test the Conditional Access Sample Policies in your Microsoft 365 Test Tenant before deploying them to production. Remember to maintain a Break Glass Account and be vigilant to avoid locking yourself out ⚠️.
+
+## Customization
+You can import these policies into your Test Tenant, customize them as needed, and then export them for further use. For documentation purposes, the Conditional Access Documenter from idpowertoys.com is recommended.
+
+## Dependencies
+To import these policies into your tenant, utilize the scripts provided in the `/Scripts` directory of this repository.
+
+## Updates & Revisions
+Currently, there are no plans for major releases or updates to these policies.
+
+## Feedback & Contributions
+Connect with me on Twitter [@philipp_kohn](https://twitter.com/philipp_kohn) or on [LinkedIn](https://www.linkedin.com/in/philippkohn/). As this is a community-driven project, please understand that responses may not always be immediate.

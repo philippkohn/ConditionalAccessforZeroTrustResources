@@ -4,7 +4,7 @@
 
 ## Project Overview
 
-I am a Microsoft 365 and Microsoft Entra Consultant and an enthusiast of the Persona Based Conditional Access Framework for Zero Trust by [@clajes](https://github.com/clajes). Having manually created over 50 policies, I sought an uncomplicated way to deploy them across other Azure AD Tenants. Rather than using Microsoft365DSC, I crafted my own solution, delving deep into the Microsoft Graph PowerShell SDK in the process.
+I am a Microsoft 365 and Microsoft Entra Consultant and an enthusiast of the Persona Based Conditional Access Framework for Zero Trust by [@clajes](https://github.com/clajes). Having manually created over 50 policies, I sought an uncomplicated way to deploy them across other Microsoft Entra Tenants. Rather than using Microsoft365DSC, I crafted my own solution, delving deep into the Microsoft Graph PowerShell SDK in the process.
 
 ## Repository Structure
 

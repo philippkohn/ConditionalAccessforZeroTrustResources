@@ -6,7 +6,7 @@
 This subfolder contains all the Conditional Access policies exported from my lab environment using the scripts provided in this repository. These policies are prepped for importing into another tenant.
 
 ## Policies Origin
-These policies were manually created by @philippkohn](https://github.com/philippkohn) in a Contoso Test Environment. They were subsequently exported using the scripts located in the `/Scripts` folder of this repository.
+These policies were manually created by [@philippkohn](https://github.com/philippkohn) in a Contoso Test Environment. They were subsequently exported using the scripts located in the `/Scripts` folder of this repository.
 
 For further information about the Framework, please refer to:
 - [ConditionalAccessGovernanceAndPrinciplesforZeroTrust May 2022.pdf](<../ConditionalAccessGovernanceAndPrinciplesforZeroTrust May 2022.pdf>)
